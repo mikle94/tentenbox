@@ -41,6 +41,16 @@ class GameViewController: UIViewController {
 
     func beginGame() {
         createGrid()
+        scene.generateFigures()
+        addSquare()
+    }
+
+    private func addSquare() {
+//        let squareShape = SquareShape(column: 0, row: 0)
+//        scene.addShape(for: squareShape)
+//
+//        let dotShape = DotShape(column: 1, row: 3)
+//        scene.addShape(for: dotShape)
     }
 
     private func createGrid() {

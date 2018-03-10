@@ -33,4 +33,24 @@ class Level {
         }
         return set
     }
+
+    func getRandomShape(column: Int = 0, row: Int = 0) -> Shape {
+        let randomValue = Int(arc4random_uniform(UInt32(C.Game.numberOfShapes)))
+        switch randomValue {
+        case 0:
+            return SquareShape(column: column, row: row)
+        case 1:
+            return TwoLineShape(column: column, row: row)
+        case 2:
+            return ThreeLineShape(column: column, row: row)
+        case 3:
+            return FourLineShape(column: column, row: row)
+        case 4:
+            return FiveLineShape(column: column, row: row)
+        case 5:
+            return CubeShape(column: column, row: row)
+        default:
+            return DotShape(column: column, row: row)
+        }
+    }
 }

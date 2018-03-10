@@ -12,7 +12,7 @@ class Block: Hashable {
 
     var column: Int
     var row: Int
-    var node: SKShapeNode?
+    var node: SKSpriteNode?
     var color: SKColor
 
     init(column: Int, row: Int) {

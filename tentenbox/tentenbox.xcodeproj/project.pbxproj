@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		2322E33A606A89EB7191EAB5 /* Pods_tentenbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5458FE632B5F224DFAE64D07 /* Pods_tentenbox.framework */; };
+		E607104E20529857003FBDD2 /* ThreeLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607104D20529857003FBDD2 /* ThreeLineShape.swift */; };
+		E60710502052C23C003FBDD2 /* FourLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607104F2052C23C003FBDD2 /* FourLineShape.swift */; };
+		E60710522052C31E003FBDD2 /* FiveLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60710512052C31E003FBDD2 /* FiveLineShape.swift */; };
+		E60710542052CC04003FBDD2 /* TwoLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60710532052CC04003FBDD2 /* TwoLineShape.swift */; };
+		E60710562052CCD1003FBDD2 /* CubeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60710552052CCD1003FBDD2 /* CubeShape.swift */; };
+		E6073487204C9FC30024736D /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6073486204C9FC30024736D /* Shape.swift */; };
+		E607348B204CA24E0024736D /* SquareShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607348A204CA24E0024736D /* SquareShape.swift */; };
+		E607348D204CAA930024736D /* DotShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607348C204CAA930024736D /* DotShape.swift */; };
+		E6219B7F204DDBDB00CF504A /* BottomFigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6219B7E204DDBDB00CF504A /* BottomFigure.swift */; };
 		E6C1643B2049A5CD0093E472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1643A2049A5CD0093E472 /* AppDelegate.swift */; };
 		E6C164412049A5CD0093E472 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C164402049A5CD0093E472 /* GameScene.swift */; };
 		E6C164432049A5CD0093E472 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C164422049A5CD0093E472 /* GameViewController.swift */; };
@@ -25,6 +34,15 @@
 		5458FE632B5F224DFAE64D07 /* Pods_tentenbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tentenbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F958E3B924B3F890B37CBAE /* Pods-tentenbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tentenbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-tentenbox/Pods-tentenbox.release.xcconfig"; sourceTree = "<group>"; };
 		764369C2C02763E6691FAAB4 /* Pods-tentenbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tentenbox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tentenbox/Pods-tentenbox.debug.xcconfig"; sourceTree = "<group>"; };
+		E607104D20529857003FBDD2 /* ThreeLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeLineShape.swift; sourceTree = "<group>"; };
+		E607104F2052C23C003FBDD2 /* FourLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourLineShape.swift; sourceTree = "<group>"; };
+		E60710512052C31E003FBDD2 /* FiveLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveLineShape.swift; sourceTree = "<group>"; };
+		E60710532052CC04003FBDD2 /* TwoLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoLineShape.swift; sourceTree = "<group>"; };
+		E60710552052CCD1003FBDD2 /* CubeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeShape.swift; sourceTree = "<group>"; };
+		E6073486204C9FC30024736D /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		E607348A204CA24E0024736D /* SquareShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareShape.swift; sourceTree = "<group>"; };
+		E607348C204CAA930024736D /* DotShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotShape.swift; sourceTree = "<group>"; };
+		E6219B7E204DDBDB00CF504A /* BottomFigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomFigure.swift; sourceTree = "<group>"; };
 		E6C164372049A5CD0093E472 /* tentenbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tentenbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6C1643A2049A5CD0093E472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6C164402049A5CD0093E472 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -69,6 +87,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E60710572052F769003FBDD2 /* Helping Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E60710582052F777003FBDD2 /* Extensions */,
+			);
+			path = "Helping Classes";
+			sourceTree = "<group>";
+		};
+		E60710582052F777003FBDD2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E6073488204CA1FE0024736D /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				E6073486204C9FC30024736D /* Shape.swift */,
+				E607348C204CAA930024736D /* DotShape.swift */,
+				E607348A204CA24E0024736D /* SquareShape.swift */,
+				E60710552052CCD1003FBDD2 /* CubeShape.swift */,
+				E60710532052CC04003FBDD2 /* TwoLineShape.swift */,
+				E607104D20529857003FBDD2 /* ThreeLineShape.swift */,
+				E607104F2052C23C003FBDD2 /* FourLineShape.swift */,
+				E60710512052C31E003FBDD2 /* FiveLineShape.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		E6073489204CA2140024736D /* Fundamental */ = {
+			isa = PBXGroup;
+			children = (
+				E6C164602049B9A80093E472 /* Level.swift */,
+				E6C164572049B2DB0093E472 /* Block.swift */,
+				E6C164592049B3290093E472 /* Array2D.swift */,
+				E6219B7E204DDBDB00CF504A /* BottomFigure.swift */,
+			);
+			path = Fundamental;
+			sourceTree = "<group>";
+		};
 		E6C1642E2049A5CD0093E472 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +155,7 @@
 				E6C164562049A9970093E472 /* Models */,
 				E6C164542049A97D0093E472 /* Views */,
 				E6C164552049A9890093E472 /* Controllers */,
+				E60710572052F769003FBDD2 /* Helping Classes */,
 				E6C164532049A9740093E472 /* Resources */,
 				E6C164522049A9640093E472 /* Supporting Files */,
 			);
@@ -139,9 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				E6C164402049A5CD0093E472 /* GameScene.swift */,
-				E6C164602049B9A80093E472 /* Level.swift */,
-				E6C164572049B2DB0093E472 /* Block.swift */,
-				E6C164592049B3290093E472 /* Array2D.swift */,
+				E6073489204CA2140024736D /* Fundamental */,
+				E6073488204CA1FE0024736D /* Shapes */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -286,14 +345,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60710542052CC04003FBDD2 /* TwoLineShape.swift in Sources */,
+				E6219B7F204DDBDB00CF504A /* BottomFigure.swift in Sources */,
 				E6C164412049A5CD0093E472 /* GameScene.swift in Sources */,
+				E607104E20529857003FBDD2 /* ThreeLineShape.swift in Sources */,
 				E6C164582049B2DB0093E472 /* Block.swift in Sources */,
+				E607348D204CAA930024736D /* DotShape.swift in Sources */,
 				E6C164432049A5CD0093E472 /* GameViewController.swift in Sources */,
 				E6C1645F2049B71B0093E472 /* Utils.swift in Sources */,
+				E60710522052C31E003FBDD2 /* FiveLineShape.swift in Sources */,
+				E6073487204C9FC30024736D /* Shape.swift in Sources */,
 				E6C1643B2049A5CD0093E472 /* AppDelegate.swift in Sources */,
+				E60710562052CCD1003FBDD2 /* CubeShape.swift in Sources */,
 				E6C1645A2049B3290093E472 /* Array2D.swift in Sources */,
 				E6C164612049B9A80093E472 /* Level.swift in Sources */,
+				E607348B204CA24E0024736D /* SquareShape.swift in Sources */,
 				E6C1645D2049B64B0093E472 /* Constants.swift in Sources */,
+				E60710502052C23C003FBDD2 /* FourLineShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
