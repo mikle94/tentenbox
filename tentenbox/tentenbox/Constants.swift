@@ -30,14 +30,19 @@ struct Constants {
     }
 
     struct Appearance {
+        // ui properties
         static let margin: CGFloat = 25.0
         static let itemMargin: CGFloat = 1.0
 
         static let radius: CGFloat = 4.0
-
         static let figureRadius: CGFloat = 3.0
+
         static let figureTouchOffset: CGFloat = 50.0
 
+        // animation
+        static let scaleAnimationDuration: TimeInterval = 0.125
+
+        // colors
         static let sceneBackgroundColor: SKColor = .darkGray
         static let blockColor: SKColor = .gray
     }

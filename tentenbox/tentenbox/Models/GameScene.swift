@@ -18,8 +18,13 @@ class GameScene: SKScene {
     // whole layer
     let gameLayer = SKNode()
     // layer for gaming blocks
-    let blocksLayer = SKNode()
-
+    let blocksLayer: SKShapeNode = {
+        let size = U.screen.width - C.Appearance.margin * 2
+        let node = SKShapeNode(rect: CGRect(origin: .zero, size: CGSize(width: size, height: size)))
+        node.position = blocksLayerPosition
+        node.lineWidth = 0
+        return node
+    }()
     static let blocksLayerPosition = CGPoint(
         x: C.Appearance.margin,
         y: U.screen.height - U.statusBarHeight - C.Appearance.margin - (C.Game.blockSize + C.Appearance.itemMargin) * CGFloat(C.Game.numberOfRows)
@@ -43,7 +48,6 @@ class GameScene: SKScene {
         backgroundColor = C.Appearance.sceneBackgroundColor
 
         addChild(gameLayer)
-        blocksLayer.position = GameScene.blocksLayerPosition
         gameLayer.addChild(blocksLayer)
 
         p(blocksLayer.frame)
@@ -127,6 +131,7 @@ class GameScene: SKScene {
             guard let figurePosition = BottomFigure(rawValue: i) else { continue }
             let figure = figures[i] ?? initPossibleFigure(with: shape, for: figurePosition)
             figures[i] = figure
+            figures[i]?.userData = ["shape": shape]
             figureContainers[i].addChild(figure)
         }
     }
@@ -163,43 +168,41 @@ class GameScene: SKScene {
 
     // MARK: Touches
 
-    override func didMove(to view: SKView) {
-    }
-
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+        guard let (node, location) = determineNodeAndPoint(for: touch) else { return }
+        scaleAndMove(node, at: location)
+    }
+
+    private func determineNodeAndPoint(for touch: UITouch) -> (SKNode, CGPoint)? {
         let touchLocation = touch.location(in: self)
         let node = atPoint(touchLocation)
-        if let nodeName = node.name {
-            switch nodeName {
-            // small block
-            case C.Name.bottomFigureBlock:
-                guard let parentNode = node.parent, let parentContainer = parentNode.parent else { return }
-                let location = touch.location(in: parentContainer)
-                scaleAndMove(parentNode, at: location)
-            // whole shape figure
-            case C.Name.bottomFigure:
-                if let parentContainer = node.parent {
-                    let location = touch.location(in: parentContainer)
-                    scaleAndMove(node, at: location)
-                } else {
-                    scaleAndMove(node)
-                }
-            // shape figure touch container area
-            case C.Name.bottomFigureContainer:
-                guard let childNode = node.children.first else { return }
-                let location = touch.location(in: node)
-                scaleAndMove(childNode, at: location)
-            default:
-                break
-            }
+        guard let nodeName = node.name else { return nil }
+        switch nodeName {
+        // small block
+        case C.Name.bottomFigureBlock:
+            guard let parentNode = node.parent, let parentContainer = parentNode.parent else { return nil }
+            let location = touch.location(in: parentContainer)
+            return (parentNode, location)
+        // whole shape figure
+        case C.Name.bottomFigure:
+            guard let parentContainer = node.parent else { return nil }
+            let location = touch.location(in: parentContainer)
+            return (node, location)
+        // shape figure touch container area
+        case C.Name.bottomFigureContainer:
+            guard let childNode = node.children.first else { return nil }
+            let location = touch.location(in: node)
+            return (childNode, location)
+        default:
+            return nil
         }
     }
 
     private func scaleAndMove(_ node: SKNode, at point: CGPoint? = nil, toInitialState: Bool = false) {
         if !toInitialState { touchedFigure = node }
         let scaleValue: CGFloat = C.Game.touchedBlockSize / C.Game.figureBlockSize
-        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? 0.125 : 0)
+        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? C.Appearance.scaleAnimationDuration : 0)
         let nodePosition: CGPoint
         if toInitialState, let parent = node.parent {
             nodePosition = CGPoint(
@@ -212,7 +215,7 @@ class GameScene: SKScene {
                 y: (point?.y ?? 0) + C.Appearance.figureTouchOffset
             )
         }
-        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? 0.125 : 0)
+        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? C.Appearance.scaleAnimationDuration : 0)
         let group = SKAction.group([scaleAction, moveAction])
         node.removeAllActions()
         node.run(group)
@@ -227,8 +230,34 @@ class GameScene: SKScene {
         )
         let moveAction = SKAction.move(to: nodePosition, duration: 0)
         node.run(moveAction)
-//        let position = parentNode.convert(nodePosition, to: blocksLayer)
-//        p(position)
+        guard let shape = node.userData?["shape"] as? Shape else { return }
+        let position = parentNode.convert(nodePosition, to: blocksLayer)
+        findBlock(at: position, with: shape)
+    }
+
+    private func findBlock(at position: CGPoint, with shape: Shape) {
+        let hBlocksCount = shape.hBlocksCount
+        let vBlocksCount = shape.vBlocksCount
+        let partOfBlock = C.Game.blockSize * 0.5 // 50% to highlight
+        let biggerThanLeftSide = position.x > -partOfBlock
+        let biggerThanBottomSide = position.y > -partOfBlock
+        let lowerThanRightSide = position.x + C.Game.blockSize * CGFloat(hBlocksCount) +
+            C.Appearance.itemMargin * CGFloat(hBlocksCount - 1) <
+            blocksLayer.frame.width - (C.Game.blockSize - partOfBlock) + C.Game.blockSize
+            + C.Appearance.itemMargin * CGFloat(hBlocksCount - 1)
+        let lowerThanTopSide = position.y + C.Game.blockSize * CGFloat(vBlocksCount) +
+            C.Appearance.itemMargin * CGFloat(vBlocksCount - 1) <
+            blocksLayer.frame.height - (C.Game.blockSize - partOfBlock) + C.Game.blockSize
+            + C.Appearance.itemMargin * CGFloat(vBlocksCount - 1)
+        guard biggerThanLeftSide && biggerThanBottomSide && lowerThanTopSide && lowerThanRightSide else { return }
+        let xOffset = position.x > blocksLayer.frame.width - C.Game.blockSize * CGFloat(hBlocksCount) -
+            C.Appearance.itemMargin * CGFloat(hBlocksCount - 1) ? position.x : position.x + partOfBlock
+        let yOffset = position.y > blocksLayer.frame.height - C.Game.blockSize * CGFloat(vBlocksCount) -
+            C.Appearance.itemMargin * CGFloat(vBlocksCount - 1) ? position.y : position.y + partOfBlock
+        let column = Int(xOffset / C.Game.blockSize)
+        let row = Int(yOffset / C.Game.blockSize)
+        p(column)
+        p(row)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
