@@ -15,21 +15,20 @@ class GameScene: SKScene {
 
     var level: Level?
 
+    // whole layer
     let gameLayer = SKNode()
+    // layer for gaming blocks
     let blocksLayer = SKNode()
+
     static let blocksLayerPosition = CGPoint(
         x: C.Appearance.margin,
-        y: U.screen.height - U.statusBarHeight - C.Appearance.margin - (C.Game.blockHeight + C.Appearance.itemMargin) * CGFloat(C.Game.numberOfRows)
+        y: U.screen.height - U.statusBarHeight - C.Appearance.margin - (C.Game.blockSize + C.Appearance.itemMargin) * CGFloat(C.Game.numberOfRows)
     )
 
     // bottom figure containers
-    var leftFigureContainer: SKShapeNode?
-    var middleFigureContainer: SKShapeNode?
-    var rightFigureContainer: SKShapeNode?
-    var leftFigure: SKShapeNode?
-    var middleFigure: SKShapeNode?
-    var rightFigure: SKShapeNode?
-
+    var figureContainers: [SKShapeNode] = []
+    var figures: [SKShapeNode?] = [SKShapeNode?](repeatElement(nil, count: 3))
+    // fogure being touched by user
     var touchedFigure: SKNode?
 
     // MARK: Initialization
@@ -47,21 +46,8 @@ class GameScene: SKScene {
         blocksLayer.position = GameScene.blocksLayerPosition
         gameLayer.addChild(blocksLayer)
 
-        leftFigureContainer = SKShapeNode(rect: containerRect(for: .left))
-        leftFigureContainer!.lineWidth = 1
-        leftFigureContainer!.position = containerPosition(for: .left)
-        leftFigureContainer!.name = C.Name.bottomFigureContainer
-        gameLayer.addChild(leftFigureContainer!)
-        middleFigureContainer = SKShapeNode(rect: containerRect(for: .middle))
-        middleFigureContainer!.lineWidth = 1
-        middleFigureContainer!.position = containerPosition(for: .middle)
-        middleFigureContainer!.name = C.Name.bottomFigureContainer
-        gameLayer.addChild(middleFigureContainer!)
-        rightFigureContainer = SKShapeNode(rect: containerRect(for: .right))
-        rightFigureContainer!.lineWidth = 1
-        rightFigureContainer!.position = containerPosition(for: .right)
-        rightFigureContainer!.name = C.Name.bottomFigureContainer
-        gameLayer.addChild(rightFigureContainer!)
+        p(blocksLayer.frame)
+        p(blocksLayer.position)
     }
 
     // MARK: Calculation Functions
@@ -75,8 +61,8 @@ class GameScene: SKScene {
 
     // calculate rect for figure's shape
     private func rect(for shape: Shape) -> CGRect {
-        let width = CGFloat(shape.hBlocksCount) * C.Game.figureBlockWidth + CGFloat(shape.hBlocksCount - 1) * C.Appearance.itemMargin
-        let height = CGFloat(shape.vBlocksCount) * C.Game.figureBlockHeight + CGFloat(shape.vBlocksCount - 1) * C.Appearance.itemMargin
+        let width = CGFloat(shape.hBlocksCount) * C.Game.figureBlockSize + CGFloat(shape.hBlocksCount - 1) * C.Appearance.itemMargin
+        let height = CGFloat(shape.vBlocksCount) * C.Game.figureBlockSize + CGFloat(shape.vBlocksCount - 1) * C.Appearance.itemMargin
         return CGRect(x: 0.0, y: 0.0, width: width, height: height)
     }
 
@@ -107,7 +93,7 @@ class GameScene: SKScene {
     // MARK: Implementation
 
     func addShapes(for blocks: Set<Block>) {
-        let size = CGSize(width: C.Game.blockWidth, height: C.Game.blockHeight)
+        let size = CGSize(width: C.Game.blockSize, height: C.Game.blockSize)
         for block in blocks {
             let backgroundTexture = SKTexture(image: #imageLiteral(resourceName: "block"))
             let node = SKSpriteNode(texture: backgroundTexture, size: size)
@@ -120,31 +106,36 @@ class GameScene: SKScene {
         }
     }
 
+    func createBottomFigures() {
+        for i in 0 ..< 3 {
+            guard let figurePosition = BottomFigure(rawValue: i) else { continue }
+            let nodeContainer = SKShapeNode(rect: containerRect(for: figurePosition))
+            nodeContainer.lineWidth = 0
+            nodeContainer.position = containerPosition(for: figurePosition)
+            nodeContainer.name = C.Name.bottomFigureContainer
+            figureContainers.append(nodeContainer)
+            gameLayer.addChild(nodeContainer)
+        }
+    }
+
     func generateFigures() {
         guard let level = level else {
             fatalError("Level class is not initialized")
         }
-        for _ in 0 ..< 3 {
+        for i in 0 ..< figureContainers.count {
             let shape = level.getRandomShape()
-            initPossibleFigure(with: shape)
+            guard let figurePosition = BottomFigure(rawValue: i) else { continue }
+            let figure = figures[i] ?? initPossibleFigure(with: shape, for: figurePosition)
+            figures[i] = figure
+            figureContainers[i].addChild(figure)
         }
     }
 
-    private func initPossibleFigure(with shape: Shape) {
+    private func initPossibleFigure(with shape: Shape, for figurePosition: BottomFigure) -> SKShapeNode {
         let shapeRect = rect(for: shape)
-        if leftFigure == nil {
-            leftFigure = SKShapeNode(rect: shapeRect)
-            configureFigure(leftFigure, with: shape, rect: shapeRect, for: .left)
-            leftFigureContainer?.addChild(leftFigure!)
-        } else if middleFigure == nil {
-            middleFigure = SKShapeNode(rect: shapeRect)
-            configureFigure(middleFigure, with: shape, rect: shapeRect, for: .middle)
-            middleFigureContainer?.addChild(middleFigure!)
-        } else if rightFigure == nil {
-            rightFigure = SKShapeNode(rect: shapeRect)
-            configureFigure(rightFigure, with: shape, rect: shapeRect, for: .right)
-            rightFigureContainer?.addChild(rightFigure!)
-        }
+        let node = SKShapeNode(rect: shapeRect)
+        configureFigure(node, with: shape, rect: shapeRect, for: figurePosition)
+        return node
     }
 
     private func configureFigure(_ figure: SKShapeNode?, with shape: Shape, rect: CGRect, for type: BottomFigure) {
@@ -157,7 +148,7 @@ class GameScene: SKScene {
     }
 
     func add(_ shape: Shape, to figure: SKShapeNode) {
-        let size = CGSize(width: C.Game.figureBlockWidth, height: C.Game.figureBlockHeight)
+        let size = CGSize(width: C.Game.figureBlockSize, height: C.Game.figureBlockSize)
         for block in shape.blocks {
             let backgroundTexture = SKTexture(image: #imageLiteral(resourceName: "block"))
             let node = SKSpriteNode(texture: backgroundTexture, size: size)
@@ -205,19 +196,15 @@ class GameScene: SKScene {
         }
     }
 
-    private func scaleAndMove(_ node: SKNode, at point: CGPoint? = nil, toInitialState: Bool = false, completion: (() -> Void)? = nil) {
-        if !toInitialState {
-            touchedFigure = node
-        }
-        let wantedBlockWidth = C.Game.blockWidth * 0.8
-        var scaleValue = wantedBlockWidth / C.Game.figureBlockWidth
-        scaleValue = pow(scaleValue, toInitialState ? -1 : 1)
-        let scaleAction = SKAction.scale(by: scaleValue, duration: toInitialState ? 0.15 : 0)
+    private func scaleAndMove(_ node: SKNode, at point: CGPoint? = nil, toInitialState: Bool = false) {
+        if !toInitialState { touchedFigure = node }
+        let scaleValue: CGFloat = C.Game.touchedBlockSize / C.Game.figureBlockSize
+        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? 0.125 : 0)
         let nodePosition: CGPoint
         if toInitialState, let parent = node.parent {
             nodePosition = CGPoint(
-                x: parent.frame.width / 2 - node.frame.width / 2 * scaleValue,
-                y: parent.frame.height / 2 - node.frame.height / 2 * scaleValue
+                x: parent.frame.width / 2 - node.frame.width / 2 * (1 / scaleValue),
+                y: parent.frame.height / 2 - node.frame.height / 2 * (1 / scaleValue)
             )
         } else {
             nodePosition = CGPoint(
@@ -225,26 +212,36 @@ class GameScene: SKScene {
                 y: (point?.y ?? 0) + C.Appearance.figureTouchOffset
             )
         }
-        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? 0.15 : 0)
+        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? 0.125 : 0)
         let group = SKAction.group([scaleAction, moveAction])
-        node.run(group, completion: completion ?? {})
+        node.removeAllActions()
+        node.run(group)
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first, let node = touchedFigure, let parentNode = node.parent else { return }
+        let touchLocation = touch.location(in: parentNode)
+        let nodePosition = CGPoint(
+            x: touchLocation.x - node.frame.width / 2,
+            y: touchLocation.y + C.Appearance.figureTouchOffset
+        )
+        let moveAction = SKAction.move(to: nodePosition, duration: 0)
+        node.run(moveAction)
+//        let position = parentNode.convert(nodePosition, to: blocksLayer)
+//        p(position)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let figure = touchedFigure else { return }
-        isUserInteractionEnabled = false
-        scaleAndMove(figure, toInitialState: true) {
-            self.touchedFigure = nil
-            self.isUserInteractionEnabled = true
-        }
+        deleteAndSetBack()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        deleteAndSetBack()
+    }
+
+    private func deleteAndSetBack() {
         guard let figure = touchedFigure else { return }
-        isUserInteractionEnabled = false
-        scaleAndMove(figure, toInitialState: true) {
-            self.touchedFigure = nil
-            self.isUserInteractionEnabled = true
-        }
+        touchedFigure = nil
+        scaleAndMove(figure, toInitialState: true)
     }
 }

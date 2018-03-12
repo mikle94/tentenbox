@@ -22,7 +22,6 @@ class Block: Hashable {
     }
 
     // MARK: Hashable protocol conformation
-
     var hashValue: Int {
         return row * 10 + column
     }

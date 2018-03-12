@@ -13,19 +13,20 @@ typealias C = Constants
 struct Constants {
 
     struct Game {
+        // game settings
         static let numberOfRows: Int = 10
         static let numberOfColumns: Int = 10
-
-        static let blockWidth: CGFloat = (U.screen.width - Appearance.margin * 2 - Appearance.itemMargin * CGFloat(numberOfRows - 1)) / CGFloat(numberOfRows)
-        static let blockHeight: CGFloat = blockWidth
-        static let figureBlockWidth: CGFloat = {
+        static let numberOfShapes: Int = 7
+        static let shapeMaxHorizontalBlockCount: Int = 5
+        // main block size
+        static let blockSize: CGFloat = (U.screen.width - Appearance.margin * 2 - Appearance.itemMargin * CGFloat(numberOfRows - 1)) / CGFloat(numberOfRows)
+        // bottom block size
+        static let figureBlockSize: CGFloat = {
             let availableAreaWidth = (U.screen.width - C.Appearance.margin * 4) / 3 - C.Appearance.itemMargin * CGFloat(shapeMaxHorizontalBlockCount - 1)
             return availableAreaWidth / CGFloat(shapeMaxHorizontalBlockCount)
         }()
-        static let figureBlockHeight: CGFloat = figureBlockWidth
-
-        static let numberOfShapes: Int = 7
-        static let shapeMaxHorizontalBlockCount: Int = 5
+        // touches block size
+        static let touchedBlockSize: CGFloat = C.Game.blockSize * 0.9 // 90% of main block
     }
 
     struct Appearance {
@@ -42,6 +43,7 @@ struct Constants {
     }
 
     struct Name {
+        // node names
         static let bottomFigure: String          = "bottomFigure"
         static let bottomFigureBlock: String     = "bottomFigureBlock"
         static let bottomFigureContainer: String = "bottomFigureContainer"
