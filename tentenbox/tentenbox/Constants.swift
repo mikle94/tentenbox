@@ -37,10 +37,12 @@ struct Constants {
         static let radius: CGFloat = 4.0
         static let figureRadius: CGFloat = 3.0
 
+        // offsets
         static let figureTouchOffset: CGFloat = 50.0
+        static let figureDisplayOffset: CGFloat = (U.screen.width - C.Appearance.margin * 4) / 3
 
         // animation
-        static let scaleAnimationDuration: TimeInterval = 0.125
+        static let figureAnimationDuration: TimeInterval = 0.125
 
         // colors
         static let sceneBackgroundColor: SKColor = .darkGray

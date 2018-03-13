@@ -40,7 +40,7 @@ class Level {
         var set = Set<Block>()
         for row in 0 ..< C.Game.numberOfRows {
             for column in 0 ..< C.Game.numberOfColumns {
-                let block = Block(column: column, row: row, color: .clear, type: .empty)
+                let block = Block(column: column, row: row, type: .empty)
                 blocks[column, row] = block
                 set.insert(block)
             }

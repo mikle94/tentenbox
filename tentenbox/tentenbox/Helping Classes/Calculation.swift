@@ -27,12 +27,21 @@ class Calculation {
     }
 
     // calculate position for figure
-    static func position(for figure: BottomFigure, frame: CGRect) -> CGPoint {
+    static func position(for figure: BottomFigure, frame: CGRect, adjusted: Bool = false) -> CGPoint {
         let rect = containerRect(for: figure)
-        return CGPoint(
+        var point = CGPoint(
             x: rect.width / 2 - frame.width / 2,
             y: rect.width / 2 - frame.height / 2
         )
+        switch figure {
+        case .left:
+            point.x -= adjusted ? C.Appearance.figureDisplayOffset : 0
+        case .middle:
+            point.y -= adjusted ? C.Appearance.figureDisplayOffset : 0
+        case .right:
+            point.x += adjusted ? C.Appearance.figureDisplayOffset : 0
+        }
+        return point
     }
 
     // calculate rect for figure container
