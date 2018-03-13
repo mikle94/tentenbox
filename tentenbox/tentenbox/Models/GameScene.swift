@@ -40,7 +40,6 @@ class GameScene: SKScene {
 
     // bottom figure containers
     var figureContainers: [SKShapeNode] = []
-    var figures: [SKShapeNode?] = [SKShapeNode?](repeatElement(nil, count: 3))
     // fogure being touched by user
     var touchedFigure: SKNode?
 
@@ -92,27 +91,29 @@ class GameScene: SKScene {
         guard let level = level else {
             fatalError("Level class is not initialized")
         }
-        for i in 0 ..< figureContainers.count {
+        for (index, container) in figureContainers.enumerated() where container.children.isEmpty {
             let shape = level.getRandomShape()
-            guard let figurePosition = BottomFigure(rawValue: i) else { continue }
-            let figure = figures[i] ?? initPossibleFigure(with: shape, for: figurePosition)
-            figures[i] = figure
-            figures[i]?.userData = ["shape": shape]
-            figureContainers[i].addChild(figure)
+            guard let figurePosition = BottomFigure(rawValue: index) else { continue }
+            let shapeRect = Calculation.rect(for: shape)
+            let figure = initPossibleFigure(with: shape, rect: shapeRect, for: figurePosition)
+            figure.userData = ["shape": shape]
+            figureContainers[index].addChild(figure)
+            let originalPosition = Calculation.position(for: figurePosition, frame: shapeRect)
+            let moveAction = SKAction.move(to: originalPosition, duration: C.Appearance.figureAnimationDuration)
+            figure.run(moveAction)
         }
     }
 
-    private func initPossibleFigure(with shape: Shape, for figurePosition: BottomFigure) -> SKShapeNode {
-        let shapeRect = Calculation.rect(for: shape)
-        let node = SKShapeNode(rect: shapeRect)
-        configureFigure(node, with: shape, rect: shapeRect, for: figurePosition)
-        return node
+    private func initPossibleFigure(with shape: Shape, rect: CGRect, for figurePosition: BottomFigure) -> SKShapeNode {
+        let figure = SKShapeNode(rect: rect)
+        configureFigure(figure, with: shape, rect: rect, for: figurePosition)
+        return figure
     }
 
     private func configureFigure(_ figure: SKShapeNode?, with shape: Shape, rect: CGRect, for type: BottomFigure) {
         guard let figure = figure else { return }
         figure.name = C.Name.bottomFigure
-        figure.position = Calculation.position(for: type, frame: rect)
+        figure.position = Calculation.position(for: type, frame: rect, adjusted: true)
         figure.fillColor = .clear
         figure.strokeColor = .clear
         add(shape, to: figure)
@@ -133,6 +134,10 @@ class GameScene: SKScene {
     }
 
     // MARK: Touches
+
+    enum TouchAction {
+        case moved, ended
+    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
@@ -168,7 +173,7 @@ class GameScene: SKScene {
     private func scaleAndMove(_ node: SKNode, at point: CGPoint? = nil, toInitialState: Bool = false) {
         if !toInitialState { touchedFigure = node }
         let scaleValue: CGFloat = C.Game.touchedBlockSize / C.Game.figureBlockSize
-        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? C.Appearance.scaleAnimationDuration : 0)
+        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? C.Appearance.figureAnimationDuration : 0)
         let nodePosition: CGPoint
         if toInitialState, let parent = node.parent {
             nodePosition = CGPoint(
@@ -181,29 +186,60 @@ class GameScene: SKScene {
                 y: (point?.y ?? 0) + C.Appearance.figureTouchOffset
             )
         }
-        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? C.Appearance.scaleAnimationDuration : 0)
+        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? C.Appearance.figureAnimationDuration : 0)
         let group = SKAction.group([scaleAction, moveAction])
         node.removeAllActions()
         node.run(group)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        handleTouches(touches, with: .moved)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        handleTouches(touches, with: .ended)
+    }
+
+    private func handleTouches(_ touches: Set<UITouch>, with action: TouchAction) {
         guard let touch = touches.first, let node = touchedFigure, let parentNode = node.parent else { return }
+        // detect touch location and node position
         let touchLocation = touch.location(in: parentNode)
         let nodePosition = CGPoint(
             x: touchLocation.x - node.frame.width / 2,
             y: touchLocation.y + C.Appearance.figureTouchOffset
         )
-        let moveAction = SKAction.move(to: nodePosition, duration: 0)
-        node.run(moveAction)
+        // move touched figure above user finger
+        if action == .moved {
+            let moveAction = SKAction.move(to: nodePosition, duration: 0)
+            node.run(moveAction)
+        }
         guard let shape = node.userData?["shape"] as? Shape else { return }
+        // determine position on gaming grip
         let position = parentNode.convert(nodePosition, to: blocksLayer)
+        // if we found starting block for figure and hit is available there
         guard let (column, row) = findBlock(at: position, with: shape), figureHintAvailable(for: column, and: row, with: shape) else {
-            level?.removeHintBlocks()
-            reloadBlocksLayer()
+            // if not, move back
+            if action == .moved {
+                level?.removeHintBlocks()
+                reloadBlocksLayer()
+            } else if action == .ended {
+                deleteAndSetBack()
+            }
             return
         }
-        displayFigureHint(for: column, and: row, with: shape)
+        // display figure hint or put it on the grid
+        if action == .moved {
+            displayFigure(at: column, and: row, with: shape, for: .hint)
+        } else if action == .ended {
+            node.removeFromParent()
+            touchedFigure = nil
+            displayFigure(at: column, and: row, with: shape, for: .real)
+            generateFigures()
+        }
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        deleteAndSetBack()
     }
 
     private func findBlock(at position: CGPoint, with shape: Shape) -> (Int, Int)? {
@@ -212,13 +248,16 @@ class GameScene: SKScene {
         let hBlockSize = C.Game.touchedBlockSize * CGFloat(hBlocksCount) + C.Appearance.itemMargin * CGFloat(hBlocksCount - 1)
         let vBlockSize = C.Game.touchedBlockSize * CGFloat(vBlocksCount) + C.Appearance.itemMargin * CGFloat(vBlocksCount - 1)
         let partOfBlock = C.Game.touchedBlockSize * 0.5 // 50% to highlight
+        // checking if gaming grip contains touch position with some adjustments (50% of block needed)
         let biggerThanLeftSide = position.x > -partOfBlock
         let biggerThanBottomSide = position.y > -partOfBlock
         let lowerThanRightSide = position.x + hBlockSize < blocksLayer.frame.width - partOfBlock + C.Game.touchedBlockSize
         let lowerThanTopSide = position.y + vBlockSize < blocksLayer.frame.height - partOfBlock + C.Game.touchedBlockSize
         guard biggerThanLeftSide && biggerThanBottomSide && lowerThanTopSide && lowerThanRightSide else { return nil }
+        // afjusting offsets if needed
         let xOffset = position.x + (position.x > blocksLayer.frame.width - hBlockSize ? 0 : partOfBlock)
         let yOffset = position.y + (position.y > blocksLayer.frame.height - vBlockSize ? 0 : partOfBlock)
+        // getting column and row
         let column = Int(xOffset / (blocksLayer.frame.width / CGFloat(C.Game.numberOfColumns)))
         let row = Int(yOffset / (blocksLayer.frame.height / CGFloat(C.Game.numberOfRows)))
         guard column >= 0 && column < C.Game.numberOfColumns, row >= 0 && row < C.Game.numberOfRows else { return nil }
@@ -231,67 +270,31 @@ class GameScene: SKScene {
         for difference in shape.blockRowColumnPosition {
             let hintColumn = column + difference.columnDiff
             let hintRow = row + difference.rowDiff
-            if let block = level.blockAt(column: hintColumn, row: hintRow), !block.isHintAvailable {
-                hintAvailable = false
-                break
-            }
+            guard let block = level.blockAt(column: hintColumn, row: hintRow), !block.isHintAvailable else { continue }
+            hintAvailable = false
+            break
         }
         return hintAvailable
     }
 
-    private func displayFigureHint(for column: Int, and row: Int, with shape: Shape) {
+    private func displayFigure(at column: Int, and row: Int, with shape: Shape, for type: BlockType) {
         guard let level = level else { return }
         level.removeHintBlocks()
         for difference in shape.blockRowColumnPosition {
             let hintColumn = column + difference.columnDiff
             let hintRow = row + difference.rowDiff
-            level.addBlock(at: hintColumn, and: hintRow, with: shape, for: .hint)
-        }
-        reloadBlocksLayer()
-    }
-
-    private func putFigure(for column: Int, and row: Int, with shape: Shape) {
-        guard let level = level else { return }
-        level.removeHintBlocks()
-        for difference in shape.blockRowColumnPosition {
-            let hintColumn = column + difference.columnDiff
-            let hintRow = row + difference.rowDiff
-            level.addBlock(at: hintColumn, and: hintRow, with: shape, for: .real)
+            level.addBlock(at: hintColumn, and: hintRow, with: shape, for: type)
         }
         reloadBlocksLayer()
     }
 
     private func reloadBlocksLayer() {
-        guard let level = level else { return }
         for row in 0 ..< C.Game.numberOfRows {
-            for column in 0 ..< C.Game.numberOfRows {
-                if let block = level.blockAt(column: column, row: row) {
-                    block.node?.color = block.nodeColor
-                }
+            for column in 0 ..< C.Game.numberOfColumns {
+                guard let block = level?.blockAt(column: column, row: row) else { return }
+                block.node?.color = block.nodeColor
             }
         }
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, let node = touchedFigure, let parentNode = node.parent else { return }
-        let touchLocation = touch.location(in: parentNode)
-        let nodePosition = CGPoint(
-            x: touchLocation.x - node.frame.width / 2,
-            y: touchLocation.y + C.Appearance.figureTouchOffset
-        )
-        guard let shape = node.userData?["shape"] as? Shape else { return }
-        let position = parentNode.convert(nodePosition, to: blocksLayer)
-        guard let (column, row) = findBlock(at: position, with: shape), figureHintAvailable(for: column, and: row, with: shape) else {
-            deleteAndSetBack()
-            return
-        }
-        touchedFigure?.removeFromParent()
-        touchedFigure = nil
-        putFigure(for: column, and: row, with: shape)
-    }
-
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        deleteAndSetBack()
     }
 
     private func deleteAndSetBack() {
