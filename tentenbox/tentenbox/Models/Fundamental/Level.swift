@@ -18,20 +18,44 @@ class Level {
         return blocks[column, row]
     }
 
-    func getStartingBlocks() -> Set<Block> {
-        return createInitialBlocks()
+    func addBlock(at column: Int, and row: Int, with shape: Shape, for type: BlockType) {
+        assert(column >= 0 && column < C.Game.numberOfColumns)
+        assert(row >= 0 && row < C.Game.numberOfRows)
+        blocks[column, row]?.color = shape.color
+        blocks[column, row]?.type = type
     }
 
-    private func createInitialBlocks() -> Set<Block> {
+    func getBackgroundBlocks() -> Set<Block> {
         var set = Set<Block>()
         for row in 0 ..< C.Game.numberOfRows {
             for column in 0 ..< C.Game.numberOfColumns {
                 let block = Block(column: column, row: row)
+                set.insert(block)
+            }
+        }
+        return set
+    }
+
+    func getGamingBlocks() -> Set<Block> {
+        var set = Set<Block>()
+        for row in 0 ..< C.Game.numberOfRows {
+            for column in 0 ..< C.Game.numberOfColumns {
+                let block = Block(column: column, row: row, color: .clear, type: .empty)
                 blocks[column, row] = block
                 set.insert(block)
             }
         }
         return set
+    }
+
+    func removeHintBlocks() {
+        for row in 0 ..< C.Game.numberOfRows {
+            for column in 0 ..< C.Game.numberOfColumns {
+                if let block = blocks[column, row], block.type == .hint {
+                    block.type = .empty
+                }
+            }
+        }
     }
 
     func getRandomShape(column: Int = 0, row: Int = 0) -> Shape {
