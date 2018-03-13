@@ -45,8 +45,8 @@ class GameViewController: UIViewController {
     }
 
     private func createGrid() {
-        let blocks = level.getStartingBlocks()
-        scene.addShapes(for: blocks)
+        scene.addShapes(for: level.getBackgroundBlocks(), to: scene.blocksLayer)
+        scene.addShapes(for: level.getGamingBlocks(), to: scene.gamingBlocksLayer)
     }
 
     private func createBottomFigures() {
