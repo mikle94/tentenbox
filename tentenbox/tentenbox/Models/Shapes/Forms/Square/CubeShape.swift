@@ -26,7 +26,7 @@ class CubeShape: Shape {
             (0, 1), (1, 1), (2, 1),
             (0, 2), (1, 2), (2, 2)
         ]
-        return [.zero: differences, .ninety: differences]
+        return [.zero: differences, .ninety: differences, .oneEighty: differences, .twoSeventy: differences]
     }
 
     override var hBlocksCount: Int {

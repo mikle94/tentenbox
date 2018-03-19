@@ -11,7 +11,10 @@ import SpriteKit
 class FourLineShape: Shape {
 
     /*
-     | 0 | 1 | 2 | 3 |
+                           | 0 |
+     | 0 | 1 | 2 | 3 |     | 1 |
+                           | 2 |
+                           | 3 |
     */
 
     override var color: SKColor {
@@ -19,26 +22,30 @@ class FourLineShape: Shape {
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
+        let horizontalDifference: [(columnDiff: Int, rowDiff: Int)] = [(0, 0), (1, 0), (2, 0), (3, 0)]
+        let verticalDifference: [(columnDiff: Int, rowDiff: Int)] = [(0, 0), (0, 1), (0, 2), (0, 3)]
         return [
-            .zero: [(0, 0), (1, 0), (2, 0), (3, 0)],
-            .ninety: [(0, 0), (0, 1), (0, 2), (0, 3)]
+            .zero: horizontalDifference,
+            .ninety: verticalDifference,
+            .oneEighty: horizontalDifference,
+            .twoSeventy: verticalDifference
         ]
     }
 
     override var hBlocksCount: Int {
         switch orientation {
-        case .zero:
+        case .zero, .oneEighty:
             return 4
-        case .ninety:
+        case .ninety, .twoSeventy:
             return 1
         }
     }
 
     override var vBlocksCount: Int {
         switch orientation {
-        case .zero:
+        case .zero, .oneEighty:
             return 1
-        case .ninety:
+        case .ninety, .twoSeventy:
             return 4
         }
     }

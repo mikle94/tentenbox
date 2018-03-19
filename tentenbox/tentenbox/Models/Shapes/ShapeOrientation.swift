@@ -10,7 +10,7 @@ import Foundation
 
 enum ShapeOrientation: Int {
 
-    case zero = 0, ninety
+    case zero = 0, ninety, oneEighty, twoSeventy
 
     static let count: Int = {
         var max: Int = 0
@@ -23,8 +23,12 @@ enum ShapeOrientation: Int {
         switch randomValue {
         case 0:
             return .zero
-        default:
+        case 1:
             return .ninety
+        case 2:
+            return .oneEighty
+        default:
+            return .twoSeventy
         }
     }
 

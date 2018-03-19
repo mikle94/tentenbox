@@ -16,7 +16,7 @@ struct Constants {
         // game settings
         static let numberOfRows: Int = 10
         static let numberOfColumns: Int = 10
-        static let numberOfShapes: Int = 7
+        static let numberOfShapes: Int = 9
         static let shapeMaxHorizontalBlockCount: Int = 5
         // main block size
         static let blockSize: CGFloat = (U.screen.width - Appearance.margin * 2 - Appearance.itemMargin * CGFloat(numberOfRows - 1)) / CGFloat(numberOfRows)
