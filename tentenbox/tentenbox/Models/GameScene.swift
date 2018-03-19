@@ -18,24 +18,26 @@ class GameScene: SKScene {
     // whole layer
     let gameLayer = SKNode()
     // layer for background blocks
-    let blocksLayer: SKShapeNode = {
-        let size = U.screen.width - C.Appearance.margin * 2
-        let node = SKShapeNode(rect: CGRect(origin: .zero, size: CGSize(width: size, height: size)))
-        node.position = blocksLayerPosition
-        node.lineWidth = 0
-        return node
-    }()
+    let blocksLayer: SKShapeNode = initBlockLayer()
     // layer for gaming blocks
-    let gamingBlocksLayer: SKShapeNode = {
+    let gamingBlocksLayer: SKShapeNode = initBlockLayer()
+    // score label
+    let scoreLabel: SKLabelNode = SKLabelNode()
+
+    var score: Int = 0 {
+        didSet { scoreLabel.text = "\(score)" }
+    }
+
+    static func initBlockLayer() -> SKShapeNode {
         let size = U.screen.width - C.Appearance.margin * 2
         let node = SKShapeNode(rect: CGRect(origin: .zero, size: CGSize(width: size, height: size)))
         node.position = blocksLayerPosition
         node.lineWidth = 0
         return node
-    }()
+    }
     static let blocksLayerPosition = CGPoint(
         x: C.Appearance.margin,
-        y: U.screen.height - U.statusBarHeight - C.Appearance.margin - (C.Game.blockSize + C.Appearance.itemMargin) * CGFloat(C.Game.numberOfRows)
+        y: U.screen.height - U.statusBarHeight - C.Appearance.margin - (C.Game.blockSize + C.Appearance.itemMargin) * CGFloat(C.Game.numberOfRows) - 100
     )
 
     // bottom figure containers
@@ -53,22 +55,27 @@ class GameScene: SKScene {
         super.init(size: size)
         anchorPoint = CGPoint(x: 0.0, y: 0.0)
         backgroundColor = C.Appearance.sceneBackgroundColor
-
+        // adding nodes
         addChild(gameLayer)
         gameLayer.addChild(blocksLayer)
         gameLayer.addChild(gamingBlocksLayer)
+        scoreLabel.text = "\(score)"
+        scoreLabel.fontSize = 40.0
+        scoreLabel.position = CGPoint(x: U.screen.width / 2, y: U.screen.height - U.statusBarHeight - 100 / 2 - scoreLabel.frame.height / 2)
+        gameLayer.addChild(scoreLabel)
     }
 
     // MARK: Implementation
 
-    func addShapes(for blocks: Set<Block>, to layer: SKShapeNode) {
-        let size = CGSize(width: C.Game.blockSize, height: C.Game.blockSize)
+    func addShapes(for blocks: [Block], to layer: SKShapeNode, with size: CGFloat, nodeName: String? = nil) {
+        let size = CGSize(width: size, height: size)
         for block in blocks {
             let backgroundTexture = SKTexture(image: #imageLiteral(resourceName: "block"))
             let node = SKSpriteNode(texture: backgroundTexture, size: size)
             node.color = block.nodeColor
             node.colorBlendFactor = 1
             node.size = size
+            node.name = nodeName
             node.position = Calculation.pointFor(column: block.column, row: block.row, size: size)
             layer.addChild(node)
             block.node = node
@@ -88,9 +95,7 @@ class GameScene: SKScene {
     }
 
     func generateFigures() {
-        guard let level = level else {
-            fatalError("Level class is not initialized")
-        }
+        guard let level = level else { fatalError("Level class is not initialized") }
         for (index, container) in figureContainers.enumerated() where container.children.isEmpty {
             let shape = level.getRandomShape()
             guard let figurePosition = BottomFigure(rawValue: index) else { continue }
@@ -99,38 +104,19 @@ class GameScene: SKScene {
             figure.userData = ["shape": shape]
             figureContainers[index].addChild(figure)
             let originalPosition = Calculation.position(for: figurePosition, frame: shapeRect)
-            let moveAction = SKAction.move(to: originalPosition, duration: C.Appearance.figureAnimationDuration)
+            let moveAction = SKAction.move(to: originalPosition, duration: C.Appearance.figureMovementDuration)
             figure.run(moveAction)
         }
     }
 
     private func initPossibleFigure(with shape: Shape, rect: CGRect, for figurePosition: BottomFigure) -> SKShapeNode {
         let figure = SKShapeNode(rect: rect)
-        configureFigure(figure, with: shape, rect: rect, for: figurePosition)
-        return figure
-    }
-
-    private func configureFigure(_ figure: SKShapeNode?, with shape: Shape, rect: CGRect, for type: BottomFigure) {
-        guard let figure = figure else { return }
         figure.name = C.Name.bottomFigure
-        figure.position = Calculation.position(for: type, frame: rect, adjusted: true)
+        figure.position = Calculation.position(for: figurePosition, frame: rect, adjusted: true)
         figure.fillColor = .clear
         figure.strokeColor = .clear
-        add(shape, to: figure)
-    }
-
-    func add(_ shape: Shape, to figure: SKShapeNode) {
-        let size = CGSize(width: C.Game.figureBlockSize, height: C.Game.figureBlockSize)
-        for block in shape.blocks {
-            let backgroundTexture = SKTexture(image: #imageLiteral(resourceName: "block"))
-            let node = SKSpriteNode(texture: backgroundTexture, size: size)
-            node.color = shape.color
-            node.colorBlendFactor = 1
-            node.name = C.Name.bottomFigureBlock
-            node.position = Calculation.pointFor(column: block.column, row: block.row, size: size)
-            figure.addChild(node)
-            block.node = node
-        }
+        addShapes(for: shape.blocks, to: figure, with: C.Game.figureBlockSize, nodeName: C.Name.bottomFigureBlock)
+        return figure
     }
 
     // MARK: Touches
@@ -140,8 +126,7 @@ class GameScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        guard let (node, location) = determineNodeAndPoint(for: touch) else { return }
+        guard let touch = touches.first, let (node, location) = determineNodeAndPoint(for: touch) else { return }
         scaleAndMove(node, at: location)
     }
 
@@ -173,7 +158,7 @@ class GameScene: SKScene {
     private func scaleAndMove(_ node: SKNode, at point: CGPoint? = nil, toInitialState: Bool = false) {
         if !toInitialState { touchedFigure = node }
         let scaleValue: CGFloat = C.Game.touchedBlockSize / C.Game.figureBlockSize
-        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? C.Appearance.figureAnimationDuration : 0)
+        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? C.Appearance.figureMovementDuration : 0)
         let nodePosition: CGPoint
         if toInitialState, let parent = node.parent {
             nodePosition = CGPoint(
@@ -186,7 +171,7 @@ class GameScene: SKScene {
                 y: (point?.y ?? 0) + C.Appearance.figureTouchOffset
             )
         }
-        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? C.Appearance.figureAnimationDuration : 0)
+        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? C.Appearance.figureMovementDuration : 0)
         let group = SKAction.group([scaleAction, moveAction])
         node.removeAllActions()
         node.run(group)
@@ -235,6 +220,9 @@ class GameScene: SKScene {
             touchedFigure = nil
             displayFigure(at: column, and: row, with: shape, for: .real)
             generateFigures()
+            detectFilledLines {
+                self.checkAvailableMoves()
+            }
         }
     }
 
@@ -266,26 +254,27 @@ class GameScene: SKScene {
 
     private func figureHintAvailable(for column: Int, and row: Int, with shape: Shape) -> Bool {
         guard let level = level else { return false }
-        var hintAvailable: Bool = true
-        for difference in shape.blockRowColumnPosition {
+        for difference in shape.blockRowColumnPosition[shape.orientation]! {
             let hintColumn = column + difference.columnDiff
             let hintRow = row + difference.rowDiff
             guard let block = level.blockAt(column: hintColumn, row: hintRow), !block.isHintAvailable else { continue }
-            hintAvailable = false
-            break
+            return false
         }
-        return hintAvailable
+        return true
     }
 
     private func displayFigure(at column: Int, and row: Int, with shape: Shape, for type: BlockType) {
         guard let level = level else { return }
         level.removeHintBlocks()
-        for difference in shape.blockRowColumnPosition {
+        for difference in shape.blockRowColumnPosition[shape.orientation]! {
             let hintColumn = column + difference.columnDiff
             let hintRow = row + difference.rowDiff
             level.addBlock(at: hintColumn, and: hintRow, with: shape, for: type)
         }
         reloadBlocksLayer()
+        if type == .real {
+            score += shape.blocks.count * 10
+        }
     }
 
     private func reloadBlocksLayer() {
@@ -303,5 +292,45 @@ class GameScene: SKScene {
         scaleAndMove(figure, toInitialState: true)
         level?.removeHintBlocks()
         reloadBlocksLayer()
+    }
+
+    private func detectFilledLines(completion: (() -> Void)? = nil) {
+        guard let level = level, let lines: [[Block]] = level.getFilledLines() else {
+            completion?()
+            return
+        }
+        for (index, line) in lines.enumerated() {
+            delay(for: Double(index) * (C.Appearance.lineHighlightDuration + 0.01)) {
+                level.highlightLine(line)
+                self.reloadBlocksLayer()
+                delay(for: C.Appearance.lineHighlightDuration) {
+                    level.removeLine(line)
+                    self.reloadBlocksLayer()
+                    if index == lines.count - 1 {
+                        completion?()
+                    }
+                }
+            }
+        }
+        score += lines.count * 100
+    }
+
+    private func checkAvailableMoves() {
+        let shapes = figureContainers.flatMap({ $0.children.first?.userData?["shape"] as? Shape })
+        guard let level = level, level.areMovesAvailable(shapes), shapes.count == figureContainers.count else {
+            let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: { _ in self.restartGame() })
+            alert.addAction(cancelAction)
+            view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            return
+        }
+    }
+
+    private func restartGame() {
+        level?.removeBlocks()
+        reloadBlocksLayer()
+        _ = figureContainers.map { $0.removeAllChildren() }
+        generateFigures()
+        score = 0
     }
 }

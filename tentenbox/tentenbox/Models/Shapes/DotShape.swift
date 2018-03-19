@@ -18,8 +18,11 @@ class DotShape: Shape {
         return .purple
     }
 
-    override var blockRowColumnPosition: [(columnDiff: Int, rowDiff: Int)] {
-        return [(0, 0)]
+    override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
+        return [
+            .zero: [(0, 0)],
+            .ninety: [(0, 0)]
+        ]
     }
 
     override var hBlocksCount: Int {

@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
     lazy var skView: SKView? = {
         let skView = self.view as? SKView
         skView?.isMultipleTouchEnabled = false
+        skView?.showsNodeCount = true
+        skView?.showsFPS = true
         return skView
     }()
 
@@ -45,8 +47,9 @@ class GameViewController: UIViewController {
     }
 
     private func createGrid() {
-        scene.addShapes(for: level.getBackgroundBlocks(), to: scene.blocksLayer)
-        scene.addShapes(for: level.getGamingBlocks(), to: scene.gamingBlocksLayer)
+        let (backgroundBlocks, gamingBlocks) = level.getStartingBlocks()
+        scene.addShapes(for: backgroundBlocks, to: scene.blocksLayer, with: C.Game.blockSize)
+        scene.addShapes(for: gamingBlocks, to: scene.gamingBlocksLayer, with: C.Game.blockSize)
     }
 
     private func createBottomFigures() {

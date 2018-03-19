@@ -18,15 +18,28 @@ class FiveLineShape: Shape {
         return .red
     }
 
-    override var blockRowColumnPosition: [(columnDiff: Int, rowDiff: Int)] {
-        return [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0)]
+    override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
+        return [
+            .zero: [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0)],
+            .ninety: [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4)]
+        ]
     }
 
     override var hBlocksCount: Int {
-        return 5
+        switch orientation {
+        case .zero:
+            return 5
+        case .ninety:
+            return 1
+        }
     }
 
     override var vBlocksCount: Int {
-        return 1
+        switch orientation {
+        case .zero:
+            return 1
+        case .ninety:
+            return 5
+        }
     }
 }

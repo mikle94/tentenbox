@@ -20,10 +20,15 @@ class CubeShape: Shape {
         return .cyan
     }
 
-    override var blockRowColumnPosition: [(columnDiff: Int, rowDiff: Int)] {
-        return [(0, 0), (1, 0), (2, 0),
-                (0, 1), (1, 1), (2, 1),
-                (0, 2), (1, 2), (2, 2)]
+    override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
+        return [
+            .zero: [(0, 0), (1, 0), (2, 0),
+                    (0, 1), (1, 1), (2, 1),
+                    (0, 2), (1, 2), (2, 2)],
+            .ninety: [(0, 0), (1, 0), (2, 0),
+                      (0, 1), (1, 1), (2, 1),
+                      (0, 2), (1, 2), (2, 2)]
+        ]
     }
 
     override var hBlocksCount: Int {

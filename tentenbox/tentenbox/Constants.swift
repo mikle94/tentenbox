@@ -31,18 +31,23 @@ struct Constants {
 
     struct Appearance {
         // ui properties
-        static let margin: CGFloat = 25.0
-        static let itemMargin: CGFloat = 1.0
+        static let margin: CGFloat = 25.0 // grid margin
+        static let itemMargin: CGFloat = 1.0 // grid item margin
 
-        static let radius: CGFloat = 4.0
-        static let figureRadius: CGFloat = 3.0
+        static let radius: CGFloat = 4.0 // gaming block radius
+        static let figureRadius: CGFloat = 3.0 // bottom figure block radius
+
+        static let hintFigureAlpha: CGFloat = 0.4 // 40% hint visible
 
         // offsets
+        // CGPoint.y offset when user touch bottom figure
         static let figureTouchOffset: CGFloat = 50.0
+        // CGPoint x or y value to move original figure position to left/bottom/right
         static let figureDisplayOffset: CGFloat = (U.screen.width - C.Appearance.margin * 4) / 3
 
         // animation
-        static let figureAnimationDuration: TimeInterval = 0.125
+        static let figureMovementDuration: TimeInterval = 0.125
+        static let lineHighlightDuration: TimeInterval = 0.3
 
         // colors
         static let sceneBackgroundColor: SKColor = .darkGray

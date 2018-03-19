@@ -19,8 +19,11 @@ class SquareShape: Shape {
         return .green
     }
 
-    override var blockRowColumnPosition: [(columnDiff: Int, rowDiff: Int)] {
-        return [(0, 0), (1, 0), (0, 1), (1, 1)]
+    override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
+        return [
+            .zero: [(0, 0), (1, 0), (0, 1), (1, 1)],
+            .ninety: [(0, 0), (1, 0), (0, 1), (1, 1)]
+        ]
     }
 
     override var hBlocksCount: Int {
