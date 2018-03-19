@@ -23,9 +23,11 @@ class Block: Hashable {
         case .empty:
             return .clear
         case .hint:
-            return color.withAlphaComponent(0.4)
+            return color.withAlphaComponent(C.Appearance.hintFigureAlpha)
         case .real:
             return color
+        case .highlighted:
+            return .white
         }
     }
 
@@ -42,14 +44,14 @@ class Block: Hashable {
 
     // MARK: Hashable protocol conformation
     var hashValue: Int {
-        return row * 10 + column
+        return row * C.Game.numberOfRows + column
     }
-}
-
-enum BlockType: Int {
-    case background = 0, empty, hint, real
 }
 
 func == (lhs: Block, rhs: Block) -> Bool {
     return lhs.column == rhs.column && lhs.row == rhs.row
+}
+
+enum BlockType: Int {
+    case background = 0, empty, hint, real, highlighted
 }

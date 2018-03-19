@@ -16,13 +16,10 @@ class Utils {
     static let mainScreen: UIScreen       = .main
     // user defaults
     static let defaults: UserDefaults     = .standard
-    // application delegate
-    static let appDelegate: AppDelegate?  = application.delegate as? AppDelegate
     // application
     static let application: UIApplication = .shared
     // status bar height
     static let statusBarHeight: CGFloat   = U.application.statusBarFrame.height
-
 }
 
 // custom print function
@@ -41,4 +38,11 @@ func p(_ items: Any..., filepath: String = #file, function: String = #function, 
         Swift.print(items[i], separator: separator, terminator: i == items.count - 1 ? terminator : separator)
     }
     Swift.print("\n")
+}
+
+// delay function
+func delay(for seconds: Double, completion: @escaping () -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+        completion()
+    }
 }

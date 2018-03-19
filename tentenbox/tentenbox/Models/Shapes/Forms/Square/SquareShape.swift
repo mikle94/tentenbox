@@ -19,8 +19,9 @@ class SquareShape: Shape {
         return .green
     }
 
-    override var blockRowColumnPosition: [(columnDiff: Int, rowDiff: Int)] {
-        return [(0, 0), (1, 0), (0, 1), (1, 1)]
+    override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
+        let differences: [(columnDiff: Int, rowDiff: Int)] = [(0, 0), (1, 0), (0, 1), (1, 1)]
+        return [.zero: differences, .ninety: differences, .oneEighty: differences, .twoSeventy: differences]
     }
 
     override var hBlocksCount: Int {
