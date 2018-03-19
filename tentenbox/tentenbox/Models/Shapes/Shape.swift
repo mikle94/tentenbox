@@ -37,28 +37,33 @@ class Shape: Hashable {
             return Block(column: column + diff.columnDiff, row: row + diff.rowDiff, color: self.color, type: .real)
         }
     }
+
+}
+
+extension Shape {
+
+    static func random(column: Int = 0, row: Int = 0) -> Shape {
+        let randomValue = Int(arc4random_uniform(UInt32(C.Game.numberOfShapes)))
+        switch randomValue {
+        case 0:
+            return SquareShape(column: column, row: row)
+        case 1:
+            return TwoLineShape(column: column, row: row)
+        case 2:
+            return ThreeLineShape(column: column, row: row)
+        case 3:
+            return FourLineShape(column: column, row: row)
+        case 4:
+            return FiveLineShape(column: column, row: row)
+        case 5:
+            return CubeShape(column: column, row: row)
+        default:
+            return DotShape(column: column, row: row)
+        }
+    }
+
 }
 
 func == (lhs: Shape, rhs: Shape) -> Bool {
     return lhs.row == rhs.row && lhs.column == rhs.column
-}
-
-enum ShapeOrientation: Int {
-    case zero = 0, ninety
-
-    static let count: Int = {
-        var max: Int = 0
-        while let _ = ShapeOrientation(rawValue: max) { max += 1 }
-        return max
-    }()
-
-    static func random() -> ShapeOrientation {
-        let randomValue = Int(arc4random_uniform(UInt32(count)))
-        switch randomValue {
-        case 0:
-            return .zero
-        default:
-            return .ninety
-        }
-    }
 }

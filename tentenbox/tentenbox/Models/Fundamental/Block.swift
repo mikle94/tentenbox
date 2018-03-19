@@ -26,7 +26,7 @@ class Block: Hashable {
             return color.withAlphaComponent(C.Appearance.hintFigureAlpha)
         case .real:
             return color
-        case .hightlighted:
+        case .highlighted:
             return .white
         }
     }
@@ -53,5 +53,5 @@ func == (lhs: Block, rhs: Block) -> Bool {
 }
 
 enum BlockType: Int {
-    case background = 0, empty, hint, real, hightlighted
+    case background = 0, empty, hint, real, highlighted
 }

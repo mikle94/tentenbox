@@ -29,6 +29,7 @@
 		E6C1645F2049B71B0093E472 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1645E2049B71B0093E472 /* Utils.swift */; };
 		E6C164612049B9A80093E472 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C164602049B9A80093E472 /* Level.swift */; };
 		E6E79E9F2057D86B00EEB408 /* Calculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E79E9E2057D86B00EEB408 /* Calculation.swift */; };
+		E6F09996206020B8004D11FB /* ShapeOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F09995206020B8004D11FB /* ShapeOrientation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		E6C1645E2049B71B0093E472 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		E6C164602049B9A80093E472 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		E6E79E9E2057D86B00EEB408 /* Calculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculation.swift; sourceTree = "<group>"; };
+		E6F09995206020B8004D11FB /* ShapeOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeOrientation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,13 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				E6073486204C9FC30024736D /* Shape.swift */,
-				E607348C204CAA930024736D /* DotShape.swift */,
-				E607348A204CA24E0024736D /* SquareShape.swift */,
-				E60710552052CCD1003FBDD2 /* CubeShape.swift */,
-				E60710532052CC04003FBDD2 /* TwoLineShape.swift */,
-				E607104D20529857003FBDD2 /* ThreeLineShape.swift */,
-				E607104F2052C23C003FBDD2 /* FourLineShape.swift */,
-				E60710512052C31E003FBDD2 /* FiveLineShape.swift */,
+				E6F09995206020B8004D11FB /* ShapeOrientation.swift */,
+				E6F099942060209C004D11FB /* Forms */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -206,6 +203,20 @@
 				E6073488204CA1FE0024736D /* Shapes */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E6F099942060209C004D11FB /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				E607348C204CAA930024736D /* DotShape.swift */,
+				E607348A204CA24E0024736D /* SquareShape.swift */,
+				E60710552052CCD1003FBDD2 /* CubeShape.swift */,
+				E60710532052CC04003FBDD2 /* TwoLineShape.swift */,
+				E607104D20529857003FBDD2 /* ThreeLineShape.swift */,
+				E607104F2052C23C003FBDD2 /* FourLineShape.swift */,
+				E60710512052C31E003FBDD2 /* FiveLineShape.swift */,
+			);
+			path = Forms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +368,7 @@
 				E607348D204CAA930024736D /* DotShape.swift in Sources */,
 				E6C164432049A5CD0093E472 /* GameViewController.swift in Sources */,
 				E6C1645F2049B71B0093E472 /* Utils.swift in Sources */,
+				E6F09996206020B8004D11FB /* ShapeOrientation.swift in Sources */,
 				E60710522052C31E003FBDD2 /* FiveLineShape.swift in Sources */,
 				E6073487204C9FC30024736D /* Shape.swift in Sources */,
 				E6C1643B2049A5CD0093E472 /* AppDelegate.swift in Sources */,

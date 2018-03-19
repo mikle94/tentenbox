@@ -19,10 +19,8 @@ class DotShape: Shape {
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
-        return [
-            .zero: [(0, 0)],
-            .ninety: [(0, 0)]
-        ]
+        let differences: [(columnDiff: Int, rowDiff: Int)] = [(0, 0)]
+        return [.zero: differences, .ninety: differences]
     }
 
     override var hBlocksCount: Int {

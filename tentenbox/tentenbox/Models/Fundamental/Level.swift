@@ -88,7 +88,7 @@ class Level {
     }
 
     func highlightLine(_ blocks: [Block]) {
-        _ = blocks.map { $0.type = .hightlighted }
+        _ = blocks.map { $0.type = .highlighted }
     }
 
     func removeLine(_ blocks: [Block]) {
@@ -135,22 +135,6 @@ class Level {
     }
 
     func getRandomShape(column: Int = 0, row: Int = 0) -> Shape {
-        let randomValue = Int(arc4random_uniform(UInt32(C.Game.numberOfShapes + 4))) // 4 - orientation depentant number of shapes
-        switch randomValue {
-        case 0:
-            return SquareShape(column: column, row: row)
-        case 1, 2:
-            return TwoLineShape(column: column, row: row, orientation: randomValue % 2 == 0 ? .zero : .ninety)
-        case 3, 4:
-            return ThreeLineShape(column: column, row: row, orientation: randomValue % 2 == 0 ? .zero : .ninety)
-        case 5, 6:
-            return FourLineShape(column: column, row: row, orientation: randomValue % 2 == 0 ? .zero : .ninety)
-        case 7, 8:
-            return FiveLineShape(column: column, row: row, orientation: randomValue % 2 == 0 ? .zero : .ninety)
-        case 9:
-            return CubeShape(column: column, row: row)
-        default:
-            return DotShape(column: column, row: row)
-        }
+        return Shape.random(column: column, row: row)
     }
 }

@@ -20,10 +20,8 @@ class SquareShape: Shape {
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
-        return [
-            .zero: [(0, 0), (1, 0), (0, 1), (1, 1)],
-            .ninety: [(0, 0), (1, 0), (0, 1), (1, 1)]
-        ]
+        let differences: [(columnDiff: Int, rowDiff: Int)] = [(0, 0), (1, 0), (0, 1), (1, 1)]
+        return [.zero: differences, .ninety: differences]
     }
 
     override var hBlocksCount: Int {
