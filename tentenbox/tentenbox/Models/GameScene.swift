@@ -231,22 +231,23 @@ class GameScene: SKScene {
     }
 
     private func findBlock(at position: CGPoint, with shape: Shape) -> (Int, Int)? {
-        let hBlocksCount = shape.hBlocksCount
-        let vBlocksCount = shape.vBlocksCount
-        let hBlockSize = C.Game.touchedBlockSize * CGFloat(hBlocksCount) + C.Appearance.itemMargin * CGFloat(hBlocksCount - 1)
-        let vBlockSize = C.Game.touchedBlockSize * CGFloat(vBlocksCount) + C.Appearance.itemMargin * CGFloat(vBlocksCount - 1)
+        let hBlocksCount = CGFloat(shape.hBlocksCount)
+        let vBlocksCount = CGFloat(shape.vBlocksCount)
+        let hBlockSize = C.Game.touchedBlockSize * hBlocksCount + C.Appearance.itemMargin * (hBlocksCount - 1)
+        let vBlockSize = C.Game.touchedBlockSize * vBlocksCount + C.Appearance.itemMargin * (vBlocksCount - 1)
         // this is needed to calculate y position based on upper block of figure
-        let yDifference = vBlockSize - C.Game.touchedBlockSize / 2 - C.Game.blockSize * CGFloat(vBlocksCount - 1) - C.Appearance.itemMargin * CGFloat(vBlocksCount - 1) + C.Appearance.itemMargin
+        let halfTouchedBlock = C.Game.touchedBlockSize / 2
+        let yDifference = vBlockSize - halfTouchedBlock - (C.Game.blockSize + C.Appearance.itemMargin) * (vBlocksCount - 1) + C.Appearance.itemMargin * 2
         // this is needed to calculate x position based on left block of figure
-        let partOfBlock = C.Game.touchedBlockSize * 0.5
+        let halfOfBlock = C.Game.touchedBlockSize * 0.5
         // checking if gaming grid contains touch position with some adjustments
-        let biggerThanLeftSide = position.x > -partOfBlock
+        let biggerThanLeftSide = position.x > -halfOfBlock
         let biggerThanBottomSide = position.y > -yDifference
-        let lowerThanRightSide = position.x + hBlockSize < blocksLayer.frame.width - partOfBlock + C.Game.touchedBlockSize
+        let lowerThanRightSide = position.x + hBlockSize < blocksLayer.frame.width - halfOfBlock + C.Game.touchedBlockSize
         let lowerThanTopSide = position.y + vBlockSize < blocksLayer.frame.height + yDifference
         guard biggerThanLeftSide && biggerThanBottomSide && lowerThanTopSide && lowerThanRightSide else { return nil }
         // afjusting offsets if needed
-        let xOffset = position.x + (position.x > blocksLayer.frame.width - hBlockSize ? 0 : partOfBlock)
+        let xOffset = position.x + (position.x > blocksLayer.frame.width - hBlockSize ? 0 : halfOfBlock)
         let yOffset = position.y + (position.y > blocksLayer.frame.height - vBlockSize ? 0 : yDifference)
         // getting column and row
         let column = Int(xOffset / (blocksLayer.frame.width / CGFloat(C.Game.numberOfColumns)))
