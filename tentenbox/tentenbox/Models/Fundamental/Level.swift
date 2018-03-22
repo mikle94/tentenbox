@@ -68,7 +68,10 @@ class Level {
 
     private func getFilledLines(for orientation: LineOrientation) -> [[Block]] {
         var lines: [[Block]] = []
-        for i in 0 ..< C.Game.numberOfRows {//stride(from: C.Game.numberOfRows - 1, to: 0, by: -1) {
+        let start = orientation == .horizontal ? C.Game.numberOfRows - 1 : 0
+        let end = orientation == .horizontal ? 0 : C.Game.numberOfRows
+        let by = orientation == .horizontal ? -1 : 1
+        for i in stride(from: start, to: end, by: by) {
             var lineFilled = true
             var lineBlocks: [Block] = []
             for j in 0 ..< C.Game.numberOfColumns {
