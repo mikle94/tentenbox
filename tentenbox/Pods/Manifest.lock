@@ -1,12 +1,17 @@
 PODS:
+  - FontAwesomeKit/Core (2.2.1)
+  - FontAwesomeKit/FontAwesome (2.2.1):
+    - FontAwesomeKit/Core
   - SwiftLint (0.24.2)
 
 DEPENDENCIES:
+  - FontAwesomeKit/FontAwesome
   - SwiftLint
 
 SPEC CHECKSUMS:
+  FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
 
-PODFILE CHECKSUM: 1ab1329b346f77bc0678f85e110360e03c21e0d2
+PODFILE CHECKSUM: 454623f74ce4385334f1e003c25f55967eaaf3cd
 
 COCOAPODS: 1.4.0

@@ -17,6 +17,7 @@
 		E607348B204CA24E0024736D /* SquareShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607348A204CA24E0024736D /* SquareShape.swift */; };
 		E607348D204CAA930024736D /* DotShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607348C204CAA930024736D /* DotShape.swift */; };
 		E6219B7F204DDBDB00CF504A /* BottomFigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6219B7E204DDBDB00CF504A /* BottomFigure.swift */; };
+		E6A9A35E2065628200177E61 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9A35D2065628200177E61 /* MenuScene.swift */; };
 		E6C1643B2049A5CD0093E472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C1643A2049A5CD0093E472 /* AppDelegate.swift */; };
 		E6C164412049A5CD0093E472 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C164402049A5CD0093E472 /* GameScene.swift */; };
 		E6C164432049A5CD0093E472 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C164422049A5CD0093E472 /* GameViewController.swift */; };
@@ -47,6 +48,7 @@
 		E607348A204CA24E0024736D /* SquareShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareShape.swift; sourceTree = "<group>"; };
 		E607348C204CAA930024736D /* DotShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotShape.swift; sourceTree = "<group>"; };
 		E6219B7E204DDBDB00CF504A /* BottomFigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomFigure.swift; sourceTree = "<group>"; };
+		E6A9A35D2065628200177E61 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		E6C164372049A5CD0093E472 /* tentenbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tentenbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6C1643A2049A5CD0093E472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6C164402049A5CD0093E472 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		E6C164562049A9970093E472 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E6A9A35D2065628200177E61 /* MenuScene.swift */,
 				E6C164402049A5CD0093E472 /* GameScene.swift */,
 				E6073489204CA2140024736D /* Fundamental */,
 				E6073488204CA1FE0024736D /* Shapes */,
@@ -360,9 +363,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-tentenbox/Pods-tentenbox-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FontAwesomeKit/FontAwesomeKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -402,6 +408,7 @@
 				E6F09996206020B8004D11FB /* ShapeOrientation.swift in Sources */,
 				E60710522052C31E003FBDD2 /* FiveLineShape.swift in Sources */,
 				E6073487204C9FC30024736D /* Shape.swift in Sources */,
+				E6A9A35E2065628200177E61 /* MenuScene.swift in Sources */,
 				E6C1643B2049A5CD0093E472 /* AppDelegate.swift in Sources */,
 				E60710562052CCD1003FBDD2 /* CubeShape.swift in Sources */,
 				E6F099982060250F004D11FB /* CornerShape.swift in Sources */,

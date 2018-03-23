@@ -22,7 +22,14 @@ class GameViewController: UIViewController {
         return skView
     }()
 
-    lazy var scene: GameScene = {
+    lazy var menuScene: MenuScene = {
+        let scene = MenuScene(size: self.skView?.bounds.size ?? U.screen.size)
+        scene.scaleMode = .aspectFill
+        scene.sceneDelegate = self
+        return scene
+    }()
+
+    lazy var gameScene: GameScene = {
         let scene = GameScene(size: self.skView?.bounds.size ?? U.screen.size)
         scene.scaleMode = .aspectFill
         scene.level = level
@@ -35,8 +42,7 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        skView?.presentScene(scene)
-        beginGame()
+        skView?.presentScene(menuScene)
     }
 
     // MARK: Implementation
@@ -48,13 +54,25 @@ class GameViewController: UIViewController {
 
     private func createGrid() {
         let (backgroundBlocks, gamingBlocks) = level.getStartingBlocks()
-        scene.addShapes(for: backgroundBlocks, to: scene.blocksLayer, with: C.Game.blockSize)
-        scene.addShapes(for: gamingBlocks, to: scene.gamingBlocksLayer, with: C.Game.blockSize)
+        gameScene.addShapes(for: backgroundBlocks, to: gameScene.blocksLayer, with: C.Game.blockSize)
+        gameScene.addShapes(for: gamingBlocks, to: gameScene.gamingBlocksLayer, with: C.Game.blockSize)
     }
 
     private func createBottomFigures() {
-        scene.createBottomFigures()
-        scene.generateFigures()
+        gameScene.createBottomFigures()
+        gameScene.generateFigures()
+    }
+
+}
+
+// MARK: MenuSceneDelegate implementation
+
+extension GameViewController: MenuSceneDelegate {
+
+    func playGamePressed() {
+        let transition: SKTransition = .crossFade(withDuration: 0.5)
+        skView?.presentScene(gameScene, transition: transition)
+        beginGame()
     }
 
 }

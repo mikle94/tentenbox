@@ -7,33 +7,77 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B9BB4ACDCB81977563AAA757F1F542A /* Pods-tentenbox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4BFAAAD35A3242D81B6FA6C44B4915 /* Pods-tentenbox-dummy.m */; };
-		CA46B3946A09C1AC330E4F41A9F2A220 /* Pods-tentenbox-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D7E9A44CF212243C17EF74017C1E3040 /* Pods-tentenbox-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D967D799388ACF8CF0F70688FAE69303 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		024151FEB32F9F399439F2A2459CA194 /* Pods-tentenbox-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D7E9A44CF212243C17EF74017C1E3040 /* Pods-tentenbox-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A46AD6B75F7DF60825F6BC4EB8BA1EE /* FontAwesomeKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BEE1E1C2CD12F348DCD3A98F8F108418 /* FontAwesomeKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0FB0B6CB009744774EBC20D1C38230D9 /* FAKFontAwesome.h in Headers */ = {isa = PBXBuildFile; fileRef = 39259778C33E45E8E8915840304011F3 /* FAKFontAwesome.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1639D0A46B9C7007E7464B1DA0459658 /* FAKIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D05259B40AB6B1B076AB3D3CA5EC1 /* FAKIcon.m */; };
+		298FFB52FF03DEF39254B497F8DC8346 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AF639F48630A369AAB591B5B339CC8 /* Foundation.framework */; };
+		308866A782E804269CC80F48710FC83E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BE1AF8CEE8818CBCFD0010AE8BEE51 /* UIKit.framework */; };
+		32FAC718084E21F67BB0018A6DCE8785 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55C580E1FC5B6E9F442FE42A9553FEA /* CoreText.framework */; };
+		38F1A333E172749BAEC9C6953D732AC1 /* FontAwesomeKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6236A6F3CE8D02AB20FA3AE8D5AD4808 /* FontAwesomeKit-dummy.m */; };
+		39FE399C3C35AC8B5B2693B3A33136BD /* FAKIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = C6BC79DB1C8FF14E28A360494FB613D5 /* FAKIcon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		940F8D912CD66F0AD8F7EB74A9E5B2FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7AF639F48630A369AAB591B5B339CC8 /* Foundation.framework */; };
+		97281CA3CA0B9F61850B085AB43F5F75 /* Pods-tentenbox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4BFAAAD35A3242D81B6FA6C44B4915 /* Pods-tentenbox-dummy.m */; };
+		DDA81402CA814A2639A4914625D09669 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 414C46CCAC646F492D359C197F7A83C3 /* FontAwesome.otf */; };
+		FC8277AA368E80DC1D5B4F7737D4EE0E /* FAKFontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 244B2F8E9D4396EED0CC05B318627248 /* FAKFontAwesome.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BBC92A9632FBAE640FD6EF4BA9946758 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86832B91E801BCA93835CF7A9B3E1167;
+			remoteInfo = FontAwesomeKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0B044B13514CC4966781E3BC8412ADAA /* FontAwesomeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FontAwesomeKit.framework; path = FontAwesomeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B4D05259B40AB6B1B076AB3D3CA5EC1 /* FAKIcon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FAKIcon.m; path = FontAwesomeKit/FAKIcon.m; sourceTree = "<group>"; };
+		112AFC40118DD84E6956525FE13F7D69 /* Pods_tentenbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_tentenbox.framework; path = "Pods-tentenbox.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13CB679EB2B37466FD8C1CA769934AE2 /* Pods-tentenbox.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-tentenbox.modulemap"; sourceTree = "<group>"; };
 		1D4BFAAAD35A3242D81B6FA6C44B4915 /* Pods-tentenbox-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-tentenbox-dummy.m"; sourceTree = "<group>"; };
-		1E84C3C3BC3F23FC9ECD1A61EC633F77 /* Pods_tentenbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_tentenbox.framework; path = "Pods-tentenbox.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		244B2F8E9D4396EED0CC05B318627248 /* FAKFontAwesome.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FAKFontAwesome.m; path = FontAwesomeKit/FAKFontAwesome.m; sourceTree = "<group>"; };
+		27BE1AF8CEE8818CBCFD0010AE8BEE51 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		3834DDB0127B527FA352153F09B12A8A /* FontAwesomeKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = FontAwesomeKit.modulemap; sourceTree = "<group>"; };
+		39259778C33E45E8E8915840304011F3 /* FAKFontAwesome.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FAKFontAwesome.h; path = FontAwesomeKit/FAKFontAwesome.h; sourceTree = "<group>"; };
+		414C46CCAC646F492D359C197F7A83C3 /* FontAwesome.otf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesome.otf; path = FontAwesomeKit/FontAwesome.otf; sourceTree = "<group>"; };
+		5D71FAE105E8E43321DCAD43074A5BC5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6236A6F3CE8D02AB20FA3AE8D5AD4808 /* FontAwesomeKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FontAwesomeKit-dummy.m"; sourceTree = "<group>"; };
+		63121DFB9EA9F3CF1F970D6B7BD04C26 /* FontAwesomeKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FontAwesomeKit-prefix.pch"; sourceTree = "<group>"; };
 		894F428E68FB60D083A4D00D965B09D1 /* Pods-tentenbox-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-tentenbox-acknowledgements.plist"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		958C741E045D246D9124736960E146E7 /* Pods-tentenbox-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-tentenbox-frameworks.sh"; sourceTree = "<group>"; };
 		9983928CB07260C3278B1298CC9364F4 /* Pods-tentenbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-tentenbox.release.xcconfig"; sourceTree = "<group>"; };
+		9A4A682F7AB021B535A19BAADE1DF3D1 /* FontAwesomeKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FontAwesomeKit.xcconfig; sourceTree = "<group>"; };
 		9CEACFE03B3F307306C12378B2D8DF7E /* Pods-tentenbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-tentenbox.debug.xcconfig"; sourceTree = "<group>"; };
+		A7AF639F48630A369AAB591B5B339CC8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		AFAA24ACCD427B76B7DAA73DCD4CD800 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEE1E1C2CD12F348DCD3A98F8F108418 /* FontAwesomeKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FontAwesomeKit-umbrella.h"; sourceTree = "<group>"; };
+		C55C580E1FC5B6E9F442FE42A9553FEA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		C6BC79DB1C8FF14E28A360494FB613D5 /* FAKIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FAKIcon.h; path = FontAwesomeKit/FAKIcon.h; sourceTree = "<group>"; };
 		D694A99273084DFEFB0F182B6F5AE2D1 /* Pods-tentenbox-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-tentenbox-resources.sh"; sourceTree = "<group>"; };
 		D7E9A44CF212243C17EF74017C1E3040 /* Pods-tentenbox-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-tentenbox-umbrella.h"; sourceTree = "<group>"; };
 		DFCD8B23D2AEFFC31B0B90FB8AEDEC46 /* Pods-tentenbox-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-tentenbox-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B8CDF3A4C9BD0C00963BAAC8F61D1A10 /* Frameworks */ = {
+		59A24969D39BCC0A13CB43EBE8E1AD57 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D967D799388ACF8CF0F70688FAE69303 /* Foundation.framework in Frameworks */,
+				32FAC718084E21F67BB0018A6DCE8785 /* CoreText.framework in Frameworks */,
+				298FFB52FF03DEF39254B497F8DC8346 /* Foundation.framework in Frameworks */,
+				308866A782E804269CC80F48710FC83E /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E7E83132073A2BB155AE6121816714F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				940F8D912CD66F0AD8F7EB74A9E5B2FB /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +102,23 @@
 			path = "Target Support Files/Pods-tentenbox";
 			sourceTree = "<group>";
 		};
-		32A23E08346748F1793F899C5FF672C1 /* SwiftLint */ = {
+		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF1CA95E532A8F990E19506982FA04EE /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		429A576591988896A0460ABA68ED04C4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				414C46CCAC646F492D359C197F7A83C3 /* FontAwesome.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		70F6EF46D65FA5199E65140854B82DBD /* SwiftLint */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -70,41 +130,81 @@
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				9758CC519AE2C57A9659FFC01AAD26F9 /* Pods */,
-				A3A85652A18E6355F2B5C2B22D0665CF /* Products */,
+				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
+				932116738C6F00D847B4EAA991677A53 /* Pods */,
+				D2A06363DB1D88464C8EDD25ADE7CADF /* Products */,
 				FF4479B24AAF7817FE2EEE973723845E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		9758CC519AE2C57A9659FFC01AAD26F9 /* Pods */ = {
+		899957F174FD169200D41BC7E2BF0F16 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				32A23E08346748F1793F899C5FF672C1 /* SwiftLint */,
+				3834DDB0127B527FA352153F09B12A8A /* FontAwesomeKit.modulemap */,
+				9A4A682F7AB021B535A19BAADE1DF3D1 /* FontAwesomeKit.xcconfig */,
+				6236A6F3CE8D02AB20FA3AE8D5AD4808 /* FontAwesomeKit-dummy.m */,
+				63121DFB9EA9F3CF1F970D6B7BD04C26 /* FontAwesomeKit-prefix.pch */,
+				BEE1E1C2CD12F348DCD3A98F8F108418 /* FontAwesomeKit-umbrella.h */,
+				5D71FAE105E8E43321DCAD43074A5BC5 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/FontAwesomeKit";
+			sourceTree = "<group>";
+		};
+		8C39E982B18CAAF619C94349CABFBC03 /* FontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				39259778C33E45E8E8915840304011F3 /* FAKFontAwesome.h */,
+				244B2F8E9D4396EED0CC05B318627248 /* FAKFontAwesome.m */,
+				429A576591988896A0460ABA68ED04C4 /* Resources */,
+			);
+			name = FontAwesome;
+			sourceTree = "<group>";
+		};
+		932116738C6F00D847B4EAA991677A53 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F68706919FC22AB8265A294CEEE16063 /* FontAwesomeKit */,
+				70F6EF46D65FA5199E65140854B82DBD /* SwiftLint */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A3A85652A18E6355F2B5C2B22D0665CF /* Products */ = {
+		A2270485DA0BCF81F12AEDE4CD29875E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				1E84C3C3BC3F23FC9ECD1A61EC633F77 /* Pods_tentenbox.framework */,
+				C6BC79DB1C8FF14E28A360494FB613D5 /* FAKIcon.h */,
+				0B4D05259B40AB6B1B076AB3D3CA5EC1 /* FAKIcon.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		D2A06363DB1D88464C8EDD25ADE7CADF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B044B13514CC4966781E3BC8412ADAA /* FontAwesomeKit.framework */,
+				112AFC40118DD84E6956525FE13F7D69 /* Pods_tentenbox.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+		F68706919FC22AB8265A294CEEE16063 /* FontAwesomeKit */ = {
 			isa = PBXGroup;
 			children = (
-				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+				A2270485DA0BCF81F12AEDE4CD29875E /* Core */,
+				8C39E982B18CAAF619C94349CABFBC03 /* FontAwesome */,
+				899957F174FD169200D41BC7E2BF0F16 /* Support Files */,
 			);
-			name = Frameworks;
+			name = FontAwesomeKit;
+			path = FontAwesomeKit;
 			sourceTree = "<group>";
 		};
-		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+		FF1CA95E532A8F990E19506982FA04EE /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+				C55C580E1FC5B6E9F442FE42A9553FEA /* CoreText.framework */,
+				A7AF639F48630A369AAB591B5B339CC8 /* Foundation.framework */,
+				27BE1AF8CEE8818CBCFD0010AE8BEE51 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -120,32 +220,61 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		F17118CD7F2BE4ECFB6E0C5BBC63D6D7 /* Headers */ = {
+		4AD5E7BB081C83DDFC74125F83243B0E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA46B3946A09C1AC330E4F41A9F2A220 /* Pods-tentenbox-umbrella.h in Headers */,
+				024151FEB32F9F399439F2A2459CA194 /* Pods-tentenbox-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2935BC455A703582FBEF73959BF4596 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FB0B6CB009744774EBC20D1C38230D9 /* FAKFontAwesome.h in Headers */,
+				39FE399C3C35AC8B5B2693B3A33136BD /* FAKIcon.h in Headers */,
+				0A46AD6B75F7DF60825F6BC4EB8BA1EE /* FontAwesomeKit-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3EA54DEE2903F14CC216D9069C7DFC29 /* Pods-tentenbox */ = {
+		5074B3386345D14376F83752359A6304 /* Pods-tentenbox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5AF128B4D695110708C1BD9836DEB935 /* Build configuration list for PBXNativeTarget "Pods-tentenbox" */;
+			buildConfigurationList = C1D60424CE1836B1A80E092E638E81AC /* Build configuration list for PBXNativeTarget "Pods-tentenbox" */;
 			buildPhases = (
-				850DE69B0FBC297FFF5607F8BEBE00EF /* Sources */,
-				B8CDF3A4C9BD0C00963BAAC8F61D1A10 /* Frameworks */,
-				F17118CD7F2BE4ECFB6E0C5BBC63D6D7 /* Headers */,
+				EC799262207534C686F687022EFA72C3 /* Sources */,
+				7E7E83132073A2BB155AE6121816714F /* Frameworks */,
+				4AD5E7BB081C83DDFC74125F83243B0E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6386BBB48AA5F463782CAEEDEDB133B6 /* PBXTargetDependency */,
+			);
+			name = "Pods-tentenbox";
+			productName = "Pods-tentenbox";
+			productReference = 112AFC40118DD84E6956525FE13F7D69 /* Pods_tentenbox.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		86832B91E801BCA93835CF7A9B3E1167 /* FontAwesomeKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4BBF662945CBC460C2C9A68651DDC029 /* Build configuration list for PBXNativeTarget "FontAwesomeKit" */;
+			buildPhases = (
+				001509BAA0BA92A26A3A8CC5C43B1F71 /* Sources */,
+				59A24969D39BCC0A13CB43EBE8E1AD57 /* Frameworks */,
+				C2935BC455A703582FBEF73959BF4596 /* Headers */,
+				161316CD2CCE6177A4DD89F97C35032B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-tentenbox";
-			productName = "Pods-tentenbox";
-			productReference = 1E84C3C3BC3F23FC9ECD1A61EC633F77 /* Pods_tentenbox.framework */;
+			name = FontAwesomeKit;
+			productName = FontAwesomeKit;
+			productReference = 0B044B13514CC4966781E3BC8412ADAA /* FontAwesomeKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -165,28 +294,152 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = A3A85652A18E6355F2B5C2B22D0665CF /* Products */;
+			productRefGroup = D2A06363DB1D88464C8EDD25ADE7CADF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3EA54DEE2903F14CC216D9069C7DFC29 /* Pods-tentenbox */,
+				86832B91E801BCA93835CF7A9B3E1167 /* FontAwesomeKit */,
+				5074B3386345D14376F83752359A6304 /* Pods-tentenbox */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		161316CD2CCE6177A4DD89F97C35032B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDA81402CA814A2639A4914625D09669 /* FontAwesome.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		850DE69B0FBC297FFF5607F8BEBE00EF /* Sources */ = {
+		001509BAA0BA92A26A3A8CC5C43B1F71 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B9BB4ACDCB81977563AAA757F1F542A /* Pods-tentenbox-dummy.m in Sources */,
+				FC8277AA368E80DC1D5B4F7737D4EE0E /* FAKFontAwesome.m in Sources */,
+				1639D0A46B9C7007E7464B1DA0459658 /* FAKIcon.m in Sources */,
+				38F1A333E172749BAEC9C6953D732AC1 /* FontAwesomeKit-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC799262207534C686F687022EFA72C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97281CA3CA0B9F61850B085AB43F5F75 /* Pods-tentenbox-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6386BBB48AA5F463782CAEEDEDB133B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FontAwesomeKit;
+			target = 86832B91E801BCA93835CF7A9B3E1167 /* FontAwesomeKit */;
+			targetProxy = BBC92A9632FBAE640FD6EF4BA9946758 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		13FE4BC50DF2C637032C258E166C91D1 /* Release */ = {
+		172672E083EC22E97455AF7363EA2C32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CEACFE03B3F307306C12378B2D8DF7E /* Pods-tentenbox.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-tentenbox/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-tentenbox/Pods-tentenbox.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_tentenbox;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		40EA25D7D701099E42AED5081E665222 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A4A682F7AB021B535A19BAADE1DF3D1 /* FontAwesomeKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FontAwesomeKit/FontAwesomeKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FontAwesomeKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FontAwesomeKit/FontAwesomeKit.modulemap";
+				PRODUCT_NAME = FontAwesomeKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		55DACC8AF4F315EDB24056E3F2592C58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A4A682F7AB021B535A19BAADE1DF3D1 /* FontAwesomeKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FontAwesomeKit/FontAwesomeKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FontAwesomeKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FontAwesomeKit/FontAwesomeKit.modulemap";
+				PRODUCT_NAME = FontAwesomeKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5DE052E6CFCA2C9E1E1A5B84E800F9B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9983928CB07260C3278B1298CC9364F4 /* Pods-tentenbox.release.xcconfig */;
 			buildSettings = {
@@ -218,38 +471,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		78089BEDF10F0586FDB2D52BF1C67A92 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CEACFE03B3F307306C12378B2D8DF7E /* Pods-tentenbox.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-tentenbox/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-tentenbox/Pods-tentenbox.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_tentenbox;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		7C07ED8089F70A31B83996A8910D7F18 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -378,11 +599,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5AF128B4D695110708C1BD9836DEB935 /* Build configuration list for PBXNativeTarget "Pods-tentenbox" */ = {
+		4BBF662945CBC460C2C9A68651DDC029 /* Build configuration list for PBXNativeTarget "FontAwesomeKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				78089BEDF10F0586FDB2D52BF1C67A92 /* Debug */,
-				13FE4BC50DF2C637032C258E166C91D1 /* Release */,
+				55DACC8AF4F315EDB24056E3F2592C58 /* Debug */,
+				40EA25D7D701099E42AED5081E665222 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C1D60424CE1836B1A80E092E638E81AC /* Build configuration list for PBXNativeTarget "Pods-tentenbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				172672E083EC22E97455AF7363EA2C32 /* Debug */,
+				5DE052E6CFCA2C9E1E1A5B84E800F9B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
