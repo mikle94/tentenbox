@@ -14,15 +14,15 @@ class Calculation {
 
     static func pointFor(column: Int, row: Int, size: CGSize) -> CGPoint {
         return CGPoint(
-            x: size.width * CGFloat(column) + C.Appearance.itemMargin * CGFloat(column) + size.width / 2,
-            y: size.height * CGFloat(row) + C.Appearance.itemMargin * CGFloat(row) + size.height / 2
+            x: size.width * CGFloat(column) + Appearance.itemMargin * CGFloat(column) + size.width / 2,
+            y: size.height * CGFloat(row) + Appearance.itemMargin * CGFloat(row) + size.height / 2
         )
     }
 
     // calculate rect for figure's shape
     static func rect(for shape: Shape) -> CGRect {
-        let width = CGFloat(shape.hBlocksCount) * C.Game.figureBlockSize + CGFloat(shape.hBlocksCount - 1) * C.Appearance.itemMargin
-        let height = CGFloat(shape.vBlocksCount) * C.Game.figureBlockSize + CGFloat(shape.vBlocksCount - 1) * C.Appearance.itemMargin
+        let width = CGFloat(shape.hBlocksCount) * C.Game.figureBlockSize + CGFloat(shape.hBlocksCount - 1) * Appearance.itemMargin
+        let height = CGFloat(shape.vBlocksCount) * C.Game.figureBlockSize + CGFloat(shape.vBlocksCount - 1) * Appearance.itemMargin
         return CGRect(x: 0.0, y: 0.0, width: width, height: height)
     }
 
@@ -35,27 +35,27 @@ class Calculation {
         )
         switch figure {
         case .left:
-            point.x -= adjusted ? C.Appearance.figureDisplayOffset : 0
+            point.x -= adjusted ? Appearance.figureDisplayOffset : 0
         case .middle:
-            point.y -= adjusted ? C.Appearance.figureDisplayOffset : 0
+            point.y -= adjusted ? Appearance.figureDisplayOffset : 0
         case .right:
-            point.x += adjusted ? C.Appearance.figureDisplayOffset : 0
+            point.x += adjusted ? Appearance.figureDisplayOffset : 0
         }
         return point
     }
 
     // calculate rect for figure container
     static func containerRect(for: BottomFigure) -> CGRect {
-        let width = (U.screen.width - C.Appearance.margin * 4) / 3
+        let width = (U.screen.width - Appearance.margin * 4) / 3
         return CGRect(origin: .zero, size: CGSize(width: width, height: width))
     }
 
     // calculate position for figure container
     static func containerPosition(for figure: BottomFigure) -> CGPoint {
-        let width = (U.screen.width - C.Appearance.margin * 4) / 3
+        let width = (U.screen.width - Appearance.margin * 4) / 3
         return CGPoint(
-            x: C.Appearance.margin * CGFloat(figure.rawValue + 1) + width * CGFloat(figure.rawValue),
-            y: GameScene.blocksLayerPosition.y - width - C.Appearance.margin * 2
+            x: Appearance.margin * CGFloat(figure.rawValue + 1) + width * CGFloat(figure.rawValue),
+            y: GameScene.blocksLayerPosition.y - width - Appearance.margin * 2
         )
     }
 

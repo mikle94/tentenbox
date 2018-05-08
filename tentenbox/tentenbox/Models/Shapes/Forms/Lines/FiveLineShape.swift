@@ -19,7 +19,7 @@ class FiveLineShape: Shape {
     */
 
     override var color: SKColor {
-        return .red
+        return Appearance.fiveLineShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {

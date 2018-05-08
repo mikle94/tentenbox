@@ -16,7 +16,7 @@ class CornerShape: Shape {
      */
 
     override var color: SKColor {
-        return .brown
+        return Appearance.cornerShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {

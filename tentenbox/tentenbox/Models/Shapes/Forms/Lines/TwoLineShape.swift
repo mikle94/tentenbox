@@ -17,7 +17,7 @@ class TwoLineShape: Shape {
      */
 
     override var color: SKColor {
-        return .yellow
+        return Appearance.twoLineShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {

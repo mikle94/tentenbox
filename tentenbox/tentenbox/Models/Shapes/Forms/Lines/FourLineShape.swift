@@ -18,7 +18,7 @@ class FourLineShape: Shape {
     */
 
     override var color: SKColor {
-        return .magenta
+        return Appearance.fourLineShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {

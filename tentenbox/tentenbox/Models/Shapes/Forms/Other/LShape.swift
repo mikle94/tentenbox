@@ -17,7 +17,7 @@ class LShape: Shape {
      */
 
     override var color: SKColor {
-        return .blue
+        return Appearance.lShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {

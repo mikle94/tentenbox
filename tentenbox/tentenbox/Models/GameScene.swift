@@ -29,15 +29,15 @@ class GameScene: SKScene {
     }
 
     static func initBlockLayer() -> SKShapeNode {
-        let size = U.screen.width - C.Appearance.margin * 2
+        let size = U.screen.width - Appearance.margin * 2
         let node = SKShapeNode(rect: CGRect(origin: .zero, size: CGSize(width: size, height: size)))
         node.position = blocksLayerPosition
         node.lineWidth = 0
         return node
     }
     static let blocksLayerPosition = CGPoint(
-        x: C.Appearance.margin,
-        y: U.screen.height - U.statusBarHeight - C.Appearance.margin - (C.Game.blockSize + C.Appearance.itemMargin) * CGFloat(C.Game.numberOfRows) - 100
+        x: Appearance.margin,
+        y: U.screen.height - U.statusBarHeight - Appearance.margin - (C.Game.blockSize + Appearance.itemMargin) * CGFloat(C.Game.numberOfRows) - 100
     )
 
     // bottom figure containers
@@ -54,7 +54,7 @@ class GameScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         anchorPoint = CGPoint(x: 0.0, y: 0.0)
-        backgroundColor = C.Appearance.sceneBackgroundColor
+        backgroundColor = Appearance.sceneBackgroundColor
         // adding nodes
         addChild(gameLayer)
         gameLayer.addChild(blocksLayer)
@@ -104,7 +104,7 @@ class GameScene: SKScene {
             figure.userData = ["shape": shape]
             figureContainers[index].addChild(figure)
             let originalPosition = Calculation.position(for: figurePosition, frame: shapeRect)
-            let moveAction = SKAction.move(to: originalPosition, duration: C.Appearance.figureMovementDuration)
+            let moveAction = SKAction.move(to: originalPosition, duration: Appearance.figureMovementDuration)
             figure.run(moveAction)
         }
     }
@@ -158,7 +158,7 @@ class GameScene: SKScene {
     private func scaleAndMove(_ node: SKNode, at point: CGPoint? = nil, toInitialState: Bool = false) {
         if !toInitialState { touchedFigure = node }
         let scaleValue: CGFloat = C.Game.touchedBlockSize / C.Game.figureBlockSize
-        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? C.Appearance.figureMovementDuration : 0)
+        let scaleAction = SKAction.scale(to: toInitialState ? 1 : scaleValue, duration: toInitialState ? Appearance.figureMovementDuration : 0)
         let nodePosition: CGPoint
         if toInitialState, let parent = node.parent {
             nodePosition = CGPoint(
@@ -168,10 +168,10 @@ class GameScene: SKScene {
         } else {
             nodePosition = CGPoint(
                 x: (point?.x ?? 0) - node.frame.width / 2 * scaleValue,
-                y: (point?.y ?? 0) + C.Appearance.figureTouchOffset
+                y: (point?.y ?? 0) + Appearance.figureTouchOffset
             )
         }
-        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? C.Appearance.figureMovementDuration : 0)
+        let moveAction = SKAction.move(to: nodePosition, duration: toInitialState ? Appearance.figureMovementDuration : 0)
         let group = SKAction.group([scaleAction, moveAction])
         node.removeAllActions()
         node.run(group)
@@ -191,7 +191,7 @@ class GameScene: SKScene {
         let touchLocation = touch.location(in: parentNode)
         let nodePosition = CGPoint(
             x: touchLocation.x - node.frame.width / 2,
-            y: touchLocation.y + C.Appearance.figureTouchOffset
+            y: touchLocation.y + Appearance.figureTouchOffset
         )
         // move touched figure above user finger
         if action == .moved {
@@ -233,11 +233,11 @@ class GameScene: SKScene {
     private func findBlock(at position: CGPoint, with shape: Shape) -> (Int, Int)? {
         let hBlocksCount = CGFloat(shape.hBlocksCount)
         let vBlocksCount = CGFloat(shape.vBlocksCount)
-        let hBlockSize = C.Game.touchedBlockSize * hBlocksCount + C.Appearance.itemMargin * (hBlocksCount - 1)
-        let vBlockSize = C.Game.touchedBlockSize * vBlocksCount + C.Appearance.itemMargin * (vBlocksCount - 1)
+        let hBlockSize = C.Game.touchedBlockSize * hBlocksCount + Appearance.itemMargin * (hBlocksCount - 1)
+        let vBlockSize = C.Game.touchedBlockSize * vBlocksCount + Appearance.itemMargin * (vBlocksCount - 1)
         // this is needed to calculate y position based on upper block of figure
         let halfTouchedBlock = C.Game.touchedBlockSize / 2
-        let yDifference = vBlockSize - halfTouchedBlock - (C.Game.blockSize + C.Appearance.itemMargin) * (vBlocksCount - 1) + C.Appearance.itemMargin * 2
+        let yDifference = vBlockSize - halfTouchedBlock - (C.Game.blockSize + Appearance.itemMargin) * (vBlocksCount - 1) + Appearance.itemMargin * 2
         // this is needed to calculate x position based on left block of figure
         let halfOfBlock = C.Game.touchedBlockSize * 0.5
         // checking if gaming grid contains touch position with some adjustments
@@ -304,10 +304,10 @@ class GameScene: SKScene {
             return
         }
         for (index, line) in lines.enumerated() {
-            delay(for: Double(index) * (C.Appearance.lineHighlightDuration + 0.01)) {
+            delay(for: Double(index) * (Appearance.lineHighlightDuration + 0.01)) {
                 level.highlightLine(line)
                 self.reloadBlocksLayer()
-                delay(for: C.Appearance.lineHighlightDuration) {
+                delay(for: Appearance.lineHighlightDuration) {
                     level.removeLine(line)
                     self.reloadBlocksLayer()
                     if index == lines.count - 1 {
@@ -320,7 +320,7 @@ class GameScene: SKScene {
     }
 
     private func checkAvailableMoves() {
-        let shapes = figureContainers.flatMap({ $0.children.first?.userData?["shape"] as? Shape })
+        let shapes = figureContainers.compactMap { $0.children.first?.userData?["shape"] as? Shape }
         guard let level = level, level.areMovesAvailable(shapes), shapes.count == figureContainers.count else {
             let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: { _ in self.restartGame() })

@@ -17,7 +17,7 @@ class ThreeLineShape: Shape {
     */
 
     override var color: SKColor {
-        return .orange
+        return Appearance.threeLineShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {
