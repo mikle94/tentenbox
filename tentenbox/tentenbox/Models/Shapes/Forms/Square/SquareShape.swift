@@ -16,7 +16,7 @@ class SquareShape: Shape {
     */
 
     override var color: SKColor {
-        return .green
+        return Appearance.squareShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {

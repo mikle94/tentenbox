@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2322E33A606A89EB7191EAB5 /* Pods_tentenbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5458FE632B5F224DFAE64D07 /* Pods_tentenbox.framework */; };
+		E602BF81206952FC0041BB11 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602BF80206952FC0041BB11 /* Appearance.swift */; };
 		E607104E20529857003FBDD2 /* ThreeLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607104D20529857003FBDD2 /* ThreeLineShape.swift */; };
 		E60710502052C23C003FBDD2 /* FourLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607104F2052C23C003FBDD2 /* FourLineShape.swift */; };
 		E60710522052C31E003FBDD2 /* FiveLineShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60710512052C31E003FBDD2 /* FiveLineShape.swift */; };
@@ -39,6 +40,7 @@
 		5458FE632B5F224DFAE64D07 /* Pods_tentenbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tentenbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F958E3B924B3F890B37CBAE /* Pods-tentenbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tentenbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-tentenbox/Pods-tentenbox.release.xcconfig"; sourceTree = "<group>"; };
 		764369C2C02763E6691FAAB4 /* Pods-tentenbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tentenbox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tentenbox/Pods-tentenbox.debug.xcconfig"; sourceTree = "<group>"; };
+		E602BF80206952FC0041BB11 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		E607104D20529857003FBDD2 /* ThreeLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeLineShape.swift; sourceTree = "<group>"; };
 		E607104F2052C23C003FBDD2 /* FourLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourLineShape.swift; sourceTree = "<group>"; };
 		E60710512052C31E003FBDD2 /* FiveLineShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveLineShape.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				E6C1643A2049A5CD0093E472 /* AppDelegate.swift */,
 				E6C1645C2049B64B0093E472 /* Constants.swift */,
+				E602BF80206952FC0041BB11 /* Appearance.swift */,
 				E6C1645E2049B71B0093E472 /* Utils.swift */,
 				E6C164562049A9970093E472 /* Models */,
 				E6C164542049A97D0093E472 /* Views */,
@@ -283,7 +286,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Mikhail Kuzmenko";
 				TargetAttributes = {
 					E6C164362049A5CD0093E472 = {
@@ -364,10 +367,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-tentenbox/Pods-tentenbox-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesomeKit/FontAwesomeKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +420,7 @@
 				E6C1645A2049B3290093E472 /* Array2D.swift in Sources */,
 				E6C164612049B9A80093E472 /* Level.swift in Sources */,
 				E607348B204CA24E0024736D /* SquareShape.swift in Sources */,
+				E602BF81206952FC0041BB11 /* Appearance.swift in Sources */,
 				E6C1645D2049B64B0093E472 /* Constants.swift in Sources */,
 				E60710502052C23C003FBDD2 /* FourLineShape.swift in Sources */,
 			);
@@ -456,6 +462,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -463,6 +470,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -513,6 +521,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -520,6 +529,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

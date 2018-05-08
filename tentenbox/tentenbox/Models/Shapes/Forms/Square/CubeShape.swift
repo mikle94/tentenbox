@@ -17,7 +17,7 @@ class CubeShape: Shape {
      */
 
     override var color: SKColor {
-        return .cyan
+        return Appearance.cubeShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {

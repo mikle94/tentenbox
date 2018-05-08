@@ -15,7 +15,7 @@ class DotShape: Shape {
     */
 
     override var color: SKColor {
-        return .purple
+        return Appearance.dotShapeColor
     }
 
     override var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] {

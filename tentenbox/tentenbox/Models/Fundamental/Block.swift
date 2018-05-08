@@ -19,11 +19,11 @@ class Block: Hashable {
     var nodeColor: SKColor {
         switch type {
         case .background:
-            return C.Appearance.blockColor
+            return Appearance.blockBackgroundColor
         case .empty:
             return .clear
         case .hint:
-            return color.withAlphaComponent(C.Appearance.hintFigureAlpha)
+            return color.withAlphaComponent(Appearance.hintFigureAlpha)
         case .real:
             return color
         case .highlighted:
@@ -35,7 +35,7 @@ class Block: Hashable {
         return type != .background && type != .real
     }
 
-    init(column: Int, row: Int, color: SKColor = C.Appearance.blockColor, type: BlockType = .background) {
+    init(column: Int, row: Int, color: SKColor = Appearance.blockBackgroundColor, type: BlockType = .background) {
         self.column = column
         self.row = row
         self.color = color
