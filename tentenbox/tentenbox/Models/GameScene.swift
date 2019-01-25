@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 
+// swiftlint:disable type_body_length
 class GameScene: SKScene {
 
     // MARK: Properties
