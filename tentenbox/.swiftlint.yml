@@ -3,4 +3,5 @@ disabled_rules:
   - identifier_name
 line_length: 160
 excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - R.generated.swift
   - Pods

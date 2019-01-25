@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SpriteKit
 
 typealias C = Constants
 struct Constants {

@@ -21,8 +21,8 @@ class Shape: Hashable {
 
     var blockRowColumnPosition: [ShapeOrientation: [(columnDiff: Int, rowDiff: Int)]] { return [:] }
 
-    var hashValue: Int {
-        return blocks.reduce(0) { $0.hashValue ^ $1.hashValue }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(blocks.reduce(0) { $0.hashValue ^ $1.hashValue })
     }
 
     init(column: Int, row: Int, orientation: ShapeOrientation = .random()) {
