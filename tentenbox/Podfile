@@ -8,12 +8,12 @@ target 'tentenbox' do
   # https://github.com/realm/SwiftLint
   pod 'SwiftLint'
 
+  # resources
+  # https://github.com/mac-cain13/R.swift
+  pod 'R.swift'
+
   # icons
   # https://github.com/PrideChung/FontAwesomeKit
   pod 'FontAwesomeKit/FontAwesome'
-
-  # colors
-  # https://github.com/viccalexander/Chameleon/issues/208
-  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git', :branch => 'wip/swift4'
   
 end

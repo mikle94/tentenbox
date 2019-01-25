@@ -8,7 +8,6 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
 
 class GameViewController: UIViewController {
 
@@ -45,7 +44,7 @@ class GameViewController: UIViewController {
         skView?.presentScene(menuScene)
     }
 
-    // MARK: Implementation
+    // MARK: Logic
 
     func beginGame() {
         createGrid()
@@ -62,17 +61,14 @@ class GameViewController: UIViewController {
         gameScene.createBottomFigures()
         gameScene.generateFigures()
     }
-
 }
 
-// MARK: MenuSceneDelegate implementation
+// MARK: Menu Scene Delegate
 
 extension GameViewController: MenuSceneDelegate {
-
     func playGamePressed() {
         let transition: SKTransition = .crossFade(withDuration: 0.5)
         skView?.presentScene(gameScene, transition: transition)
         beginGame()
     }
-
 }

@@ -1,32 +1,30 @@
 PODS:
-  - ChameleonFramework/Default (2.1.0)
-  - ChameleonFramework/Swift (2.1.0):
-    - ChameleonFramework/Default
   - FontAwesomeKit/Core (2.2.1)
   - FontAwesomeKit/FontAwesome (2.2.1):
     - FontAwesomeKit/Core
-  - SwiftLint (0.25.1)
+  - R.swift (5.0.2):
+    - R.swift.Library (~> 5.0.0)
+  - R.swift.Library (5.0.0)
+  - SwiftLint (0.30.1)
 
 DEPENDENCIES:
-  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`, branch `wip/swift4`)
   - FontAwesomeKit/FontAwesome
+  - R.swift
   - SwiftLint
 
-EXTERNAL SOURCES:
-  ChameleonFramework:
-    :branch: wip/swift4
-    :git: https://github.com/ViccAlexander/Chameleon.git
-
-CHECKOUT OPTIONS:
-  ChameleonFramework:
-    :commit: db432ca1b1a3d8f83ee1f881208c0c960a325e73
-    :git: https://github.com/ViccAlexander/Chameleon.git
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FontAwesomeKit
+    - R.swift
+    - R.swift.Library
+    - SwiftLint
 
 SPEC CHECKSUMS:
-  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
-  SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
+  R.swift: 81455d81467763cbd3f4d79d938d05f4ac4c0228
+  R.swift.Library: 0bf390e729bc10bb2c9e4fb78bd043164a7be4ff
+  SwiftLint: a54bf1fe12b55c68560eb2a7689dfc81458508f7
 
-PODFILE CHECKSUM: 58f658f220d379bef55f2bf2f3178662d83b5b63
+PODFILE CHECKSUM: b3a773e13ba711aab6591fbf9c0a0cfea5dca13c
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.2

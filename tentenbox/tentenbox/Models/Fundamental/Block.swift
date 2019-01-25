@@ -43,8 +43,9 @@ class Block: Hashable {
     }
 
     // MARK: Hashable protocol conformation
-    var hashValue: Int {
-        return row * C.Game.numberOfRows + column
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(row * C.Game.numberOfRows + column)
     }
 }
 
